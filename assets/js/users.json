@@ -1,0 +1,275 @@
+{
+    "data":[
+        {
+            "ge": {
+                "id": 0,
+                "idnum": "29001003723",
+                "n": "0001",
+                "name": "იაგო",
+                "surname": "ხვიჩია",
+                "b_date": "19.05.1982",
+                "validation": "13/09/2025",
+                "img": "/assets/img/users/იაგოხვიჩია.jpg",
+                "status": "მწეველი",
+                "other_statuses": ["დამფუძნებელი"]
+            },
+
+            "en": {
+                "idnum": "29001003723",
+                "n": "0001",
+                "name": "Iago",
+                "surname": "Khvichia",
+                "b_date": "19.05.1982",
+                "validation": "13/09/2025",
+                "img": "/assets/img/users/იაგოხვიჩია.jpg",
+                "status": "smoker",
+                "other_statuses": ["founder"]
+            }
+        },
+        
+        {
+            "ge": {
+                "id": 1,
+                "idnum": "20001003734",
+                "n": "0002",
+                "name": "ვახტანგ",
+                "surname": "მეგრელიშვილი",
+                "b_date": "28.02.1972",
+                "validation": "13/09/2025",
+                "img": "/assets/img/users/ვახტანგმეგრელიშვილი.jpg",
+                "status": "მწეველი",
+                "other_statuses": ["დამფუძნებელი", "გროუერი"]
+            },
+
+            "en": {
+                
+                "idnum": "20001003734",
+                "n": "0002",
+                "name": "Vakhtang",
+                "surname": "Megrelishvili",
+                "b_date": "28.02.1972",
+                "validation": "13/09/2025",
+                "img": "/assets/img/users/ვახტანგმეგრელიშვილი.jpg",
+                "status": "smoker",
+                "other_statuses": ["founder", "grower"]
+            }
+        },
+
+        {
+            "ge": {
+                "id": 2,
+                "idnum": "29001030486",
+                "n": "0003",
+                "name": "ლევან",
+                "surname": "ჯგერენაია",
+                "b_date": "08.06.1990",
+                "validation": "13/09/2025",
+                "img": "/assets/img/users/ლევანჯგერენაია.jpg",
+                "status": "მწეველი",
+                "other_statuses": ["დამფუძნებელი"]
+            },
+
+            "en": {
+                "idnum": "29001030486",
+                "n": "0003",
+                "name": "Levan",
+                "surname": "Jgerenaia",
+                "b_date": "08.06.1990",
+                "validation": "13/09/2025",
+                "img": "/assets/img/users/ლევანჯგერენაია.jpg",
+                "status": "smoker",
+                "other_statuses": ["founder"]
+            }
+        },
+
+        {
+            "ge": {
+                "id": 3,
+                "idnum": "01001071740",
+                "n": "0004",
+                "name": "ოთო",
+                "surname": "ზაკალაშვილი",
+                "b_date": "09.07.1991",
+                "validation": "13/09/2025",
+                "img": "/assets/img/users/ოთოზაკალაშვილი.jpg",
+                "status": "მწეველი",
+                "other_statuses": ["დამფუძნებელი"]
+            },
+
+            "en": {
+                "idnum": "01001071740",
+                "n": "0004",
+                "name": "Oto",
+                "surname": "Zakalashvili",
+                "b_date": "09.07.1991",
+                "validation": "13/09/2025",
+                "img": "/assets/img/users/ოთოზაკალაშვილი.jpg",
+                "status": "smoker",
+                "other_statuses": ["founder"]
+            }
+        },
+
+        {
+            "ge": {
+                "id": 4,
+                "idnum": "01005029043",
+                "n": "0005",
+                "name": "მარიამ",
+                "surname": "შენგელია",
+                "b_date": "14.02.2000",
+                "validation": "13/09/2025",
+                "img": "/assets/img/users/მარიამშენგელია.jpg",
+                "status": "მწეველი",
+                "other_statuses": ["დამფუძნებელი"]
+            },
+
+            "en": {
+                "idnum": "01005029043",
+                "n": "0005",
+                "name": "Mariam",
+                "surname": "Shengelia",
+                "b_date": "14.02.2000",
+                "validation": "13/09/2025",
+                "img": "/assets/img/users/მარიამშენგელია.jpg",
+                "status": "smoker",
+                "other_statuses": ["founder"]
+            }
+        },
+
+        {
+            "ge": {
+                "id": 5,
+                "idnum": "01019068754",
+                "n": "0006",
+                "name": "რუსუდან",
+                "surname": "აბუაშვილი",
+                "b_date": "23.07.2003",
+                "validation": "13/09/2025",
+                "img": "/assets/img/users/რუსუდანაბუაშვილი.jpg",
+                "status": "მწეველი",
+                "other_statuses": ["დამფუძნებელი"]
+            },
+
+            "en": {
+                "idnum": "01019068754",
+                "n": "0006",
+                "name": "Rusudan",
+                "surname": "Abuashvili",
+                "b_date": "23.07.2003",
+                "validation": "13/09/2025",
+                "img": "/assets/img/users/რუსუდანაბუაშვილი.jpg",
+                "status": "smoker",
+                "other_statuses": ["founder"]
+            }
+        },
+
+        {
+            "ge": {
+                "id": 6,
+                "idnum": "01027048470",
+                "n": "0007",
+                "name": "ჰერმან",
+                "surname": "საბო",
+                "b_date": "18/11/1988",
+                "validation": "13/09/2025",
+                "img": "/assets/img/users/ჰერმანსაბო.jpg",
+                "status": "ქომაგი",
+                "other_statuses": ["დამფუძნებელი"]
+            },
+
+            "en": {
+                "idnum": "01027048470",
+                "n": "0007",
+                "name": "Hermann",
+                "surname": "Szabó",
+                "b_date": "18/11/1988",
+                "validation": "13/09/2025",
+                "img": "/assets/img/users/ჰერმანსაბო.jpg",
+                "status": "supporter",
+                "other_statuses": ["founder"]
+            }
+        },
+
+        {
+            "ge": {
+                "id": 7,
+                "idnum": "01401133739",
+                "n": "0008",
+                "name": "ალექსანდრე",
+                "surname": "რაქვიაშვილი",
+                "b_date": "10/07/1982",
+                "validation": "13/09/2025",
+                "img": "/assets/img/users/ალექსანდრერაქვიაშვილი.jpg",
+                "status": "ქომაგი",
+                "other_statuses": ["დამფუძნებელი"]
+            },
+
+            "en": {
+                "idnum": "01401133739",
+                "n": "0008",
+                "name": "Aleksandre",
+                "surname": "Raqviashvili",
+                "b_date": "10/07/1982",
+                "validation": "13/09/2025",
+                "img": "/assets/img/users/ალექსანდრერაქვიაშვილი.jpg",
+                "status": "supporter",
+                "other_statuses": ["founder"]
+            }
+        },
+
+        {
+            "ge": {
+                "id": 8,
+                "idnum": "19001078500",
+                "n": "0009",
+                "name": "დავით",
+                "surname": "წურწუმია",
+                "b_date": "20/07/1989",
+                "validation": "13/09/2025",
+                "img": "/assets/img/users/დავითწურწუმია.jpg",
+                "status": "მწეველი",
+                "other_statuses": ["დამფუძნებელი"]
+            },
+
+            "en": {
+                
+                "idnum": "19001078500",
+                "n": "0009",
+                "name": "Davit",
+                "surname": "Tsurtsumia",
+                "b_date": "20/07/1989",
+                "validation": "13/09/2025",
+                "img": "/assets/img/users/დავითწურწუმია.jpg",
+                "status": "smoker",
+                "other_statuses": ["founder"]
+            }
+        },
+
+        {
+            "ge": {
+                "id": 9,
+                "idnum": "01024078693",
+                "n": "0010",
+                "name": "ავთანდილ",
+                "surname": "ლაბაძე",
+                "b_date": "25/08/1998",
+                "validation": "13/09/2025",
+                "img": "/assets/img/users/ავთანდილლაბაძე.jpg",
+                "status": "მწეველი",
+                "other_statuses": ["დამფუძნებელი"]
+            },
+
+            "en": {
+                "idnum": "01024078693",
+                "n": "0010",
+                "name": "Avtandil",
+                "surname": "Labadze",
+                "b_date": "25/08/1998",
+                "validation": "13/09/2025",
+                "img": "/assets/img/users/ავთანდილლაბაძე.jpg",
+                "status": "smoker",
+                "other_statuses": ["founder"]
+            }
+        }
+    ]
+}
