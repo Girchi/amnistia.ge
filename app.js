@@ -8,18 +8,36 @@ const app = express();
 const port = 3000;
 const hostname = '127.0.0.1';
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename)
+const __dirname = dirname(__filename);
 
 
 app.set("view engine", "pug");
 app.use("/assets", express.static('assets'));
 
 app.get("/", (req, res) => {
-    res.render(__dirname + "/snippet/index", { message: "Hello world"});
+    async function latestUsers() {
+        const userArray = await fetch('http://127.0.0.1:3000/assets/js/users.json');
+        const users = await userArray.json();
+        res.render(__dirname + "/snippet/index", {arr: users.data.map(element => element.ge)});
+    } try {
+        latestUsers();
+    } catch(error) {
+        console.log(error);
+    }
 });
 
 app.get("/users", (req, res) => {
-    res.render(__dirname + "/snippet/users", { message: "Hello world"});
+    async function callTheAPI() {
+        const response = await fetch('http://127.0.0.1:3000/assets/js/users.json');
+        const users = await response.json();
+        res.render(__dirname + "/snippet/users", {arr: users.data.map(element => element.ge)});
+    }
+    try {
+        callTheAPI();
+    } catch(error) {
+        console.log("Something went wrong..");
+        throw new Error(error);
+    }
 });
 
 app.get("/constitution", (req, res) => {

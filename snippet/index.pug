@@ -6,7 +6,7 @@ head
   meta(content='' name='description')
   meta(content='' name='keywords')
   // Favicons
-  link(href='assets/img/kanafi.png' rel='icon')
+  link(href='assets/img/amnistia.png' rel='icon')
   link(href='assets/img/apple-touch-icon.png' rel='apple-touch-icon')
   // Google Fonts
   link(href='https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i' rel='stylesheet')
@@ -27,7 +27,7 @@ header#header.fixed-top
   .container.d-flex.align-items-center.justify-content-between
     h1.logo
       a(href='/')
-        img(src='assets/img/kanafi.png' alt='cannabis')
+        img(src='assets/img/amnistia.png' alt='cannabis')
     nav#navbar.navbar
       ul
         li
@@ -83,13 +83,13 @@ section#hero.d-flex
       .col-md-6.col-lg-3.d-flex.align-items-stretch.mb-5.mb-lg-0(data-aos='zoom-in' data-aos-delay='800')
         .icon-box
           h4.title
-            a(href='') ინვესტორი
+            a.investor(href='') ინვესტორი
           p.description
             | საზოგადოების წევრი, რომელმაც ერთჯერადად განახორციელა არანაკლებ ათასი ლარის ინვესტიცია.
       .col-md-6.col-lg-3.d-flex.align-items-stretch.mb-5.mb-lg-0(data-aos='zoom-in' data-aos-delay='900')
         .icon-box
           h4.title
-            a(href='') ოქროს ინვესტორი
+            a.golden-investor(href='') ოქროს ინვესტორი
           p.description საზოგადოების წევრი, რომელმაც განახორციელა არანაკლებ ათი ათასი ლარის ინვესტიცია.
 // End Hero
 main#main
@@ -152,10 +152,19 @@ main#main
   section#testimonials.testimonials
     .container(data-aos='fade-up')
       .section-title
-        h2 &#x10EC;&#x10D4;&#x10D5;&#x10E0;&#x10D4;&#x10D1;&#x10D8;
+        h2 წევრები
       .testimonials-slider.swiper-container(data-aos='fade-up' data-aos-delay='100')
         #latestUsers.swiper-wrapper
+          ul#usersList.list-group
+          - for(let i = 0; i < 6; i++)
+              .swiper-slide
+                .testimonial-item
+                  a(href=`user/${arr[i].id}`)         
+                    img.testimonial-img(src=`${arr[i].img}` alt='user image')
+                  h3= `${arr[i].name} ${arr[i].surname}`
+                  h4= arr[i].status
         a.users-btn(href='users') &#x10E1;&#x10E0;&#x10E3;&#x10DA;&#x10D8; &#x10E1;&#x10D8;&#x10D0;
+        h3.usersCount (12335790)
   // Modal - Full User List
   #usersModal.modal.fade(data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='usersModalLabel' aria-hidden='true')
     .modal-dialog
@@ -163,11 +172,9 @@ main#main
         .modal-header
           h5#usersModalLabel.modal-title &#x10E1;&#x10D8;&#x10D0;
           button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
-        .modal-body
-          ul#usersList.list-group
-            // Users Comming From Array
-        .modal-footer
-          button.btn.btn-success(type='button' data-bs-dismiss='modal')
+          .modal-body
+            .modal-footer
+              button.btn.btn-success(type='button' data-bs-dismiss='modal')
             | &#x10D3;&#x10D0;&#x10EE;&#x10E3;&#x10E0;&#x10D5;&#x10D0;
   // End Testimonials Section
   // ======= Services Section =======

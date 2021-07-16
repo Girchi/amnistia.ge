@@ -2,11 +2,11 @@ doctype html
 head
   meta(charset='utf-8')
   meta(content='width=device-width, initial-scale=1.0' name='viewport')
-  title Legalize
+  title Amnistia
   meta(content='' name='description')
   meta(content='' name='keywords')
   // Favicons
-  link(href='/assets/img/kanafi.png' rel='icon')
+  link(href='/assets/img/amnistia.png' rel='icon')
   link(href='/assets/img/apple-touch-icon.png' rel='apple-touch-icon')
   // Google Fonts
   link(href='https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i' rel='stylesheet')
@@ -27,7 +27,7 @@ header#header.fixed-top
   .container.d-flex.align-items-center.justify-content-between
     h1.logo
       a(href='/')
-        img(src='assets/img/kanafi.png' alt='cannabis')
+        img(src='assets/img/amnistia.png' alt='cannabis')
     // Uncomment below if you prefer to use an image logo
     // <a href="/" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
     nav#navbar.navbar
@@ -56,9 +56,13 @@ header#header.fixed-top
   h5 &#x10DB;&#x10DD;&#x10DB;&#x10EE;&#x10DB;&#x10D0;&#x10E0;&#x10D4;&#x10D1;&#x10DA;&#x10D4;&#x10D1;&#x10D8;
   input#myInput(type='text' onkeyup='myFunction()' placeholder='ძიება....' title='Type in a name')
   ul#myUL
-    li &#x10D8;&#x10E2;&#x10D5;&#x10D8;&#x10E0;&#x10D7;&#x10D4;&#x10D1;&#x10D0;...
+    each user in arr
+      li
+        a.user--li(href=`user/${user.id}`)
+          img.user-pic(src=`${user.img}`)
+          span.user--name= `${user.name} ${user.surname}`
   br
-  p#underUl
+  p#underUl                   
 // ======= Footer =======
 footer#footer
   .footer-top
