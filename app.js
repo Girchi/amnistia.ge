@@ -12,7 +12,6 @@ const __dirname = dirname(__filename)
 
 
 app.set("view engine", "pug");
-
 app.use("/assets", express.static('assets'));
 
 app.get("/", (req, res) => {

@@ -13,12 +13,12 @@
 
 body {
   font-family: "BPG Arial", sans-serif;
-  color: #327f37;
+  color: #514b4b;
 }
 
 a {
 
-  color: #327F37;
+  color: #514b4b;
 
   text-decoration: none;
 }
@@ -35,11 +35,14 @@ a:hover {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "BPG Arial", sans-serif;
+  color: #514b4b;
 }
 
 #kanafis-saz-logo {
   width: 120px;
 }
+
+
 
 /*--------------------------------------------------------------
 # Back to top button
@@ -51,9 +54,7 @@ h1, h2, h3, h4, h5, h6 {
   right: 15px;
   bottom: 15px;
   z-index: 996;
-
   background: #327f37;
-
   width: 40px;
   height: 40px;
   border-radius: 4px;
@@ -96,7 +97,7 @@ h1, h2, h3, h4, h5, h6 {
   top: calc(50% - 30px);
   left: calc(50% - 30px);
 
-  border: 6px solid #327f37;
+  border: 6px solid #514b4b;
   border-top-color: #fff;
   border-bottom-color: #fff;
   border-radius: 50%;
@@ -439,7 +440,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 56px;
   font-weight: 700;
   line-height: 72px;
-  color: #327F37;
+  color: #514b4b;
   font-family: "BPG Arial", sans-serif;
 }
 
@@ -448,7 +449,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #hero h2 {
-  color: #aaa;
+  color: #514b4b;
   margin: 10px 0 0 0;
   font-size: 20px;
   /* font-style: italic; */
@@ -467,6 +468,10 @@ h1, h2, h3, h4, h5, h6 {
   color: #fff;
   background: #327F37;
   transition: 500ms ease;
+}
+
+.secondrow {
+  text-align: center;
 }
 
 #hero .btn-get-started:hover {
@@ -490,7 +495,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #hero .icon-box .title {
   font-weight: 700;
-  margin-bottom: 15px;
+  margin-bottom: 0px;
   font-size: 18px;
 }
 
@@ -506,7 +511,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #hero .icon-box .icon {
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   padding-top: 10px;
   display: inline-block;
   transition: all 0.3s ease-in-out;
@@ -764,7 +769,7 @@ section {
 }
 
 .about-video .play-btn:hover::after {
-  border-left: 15px solid #327F37;
+  border-left: 15px solid #aaa;
   transform: scale(20);
 }
 
@@ -1276,7 +1281,7 @@ section {
 }
 
 .portfolio .portfolio-wrap:hover .portfolio-info::before {
-  top: 15px;
+  top: 35px;
   left: 15px;
 }
 
@@ -1721,6 +1726,11 @@ section {
   animation: animate-loading 1s linear infinite;
 }
 
+.row > * {
+  padding: calc(var(--bs-gutter-x)/ 2);
+  margin: 0 auto;
+}
+
 .contact .php-email-form input, .contact .php-email-form textarea {
   border-radius: 0;
   box-shadow: none;
@@ -1989,7 +1999,7 @@ section {
 }
 
 .constitution h1 {
-  color: #327f37;
+  color: #514b4b;
   text-align: center;
   margin-top:48px;
 }
