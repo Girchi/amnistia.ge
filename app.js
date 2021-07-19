@@ -14,6 +14,7 @@ const __dirname = dirname(__filename);
 
 app.set("view engine", "pug");
 app.use("/assets", express.static('assets'));
+app.use("/generate", express.static("generate"));
 
 app.get("/", (req, res) => {
     async function latestUsers() {
