@@ -70,7 +70,7 @@ async function card2png() {
           validate
         ),
         content: {
-          badge: `${hostname}/assets/img/card/${users[i].en.status}.png`,
+          badge: `${hostname}/assets/img/card/${users[i].en.status.replace(" ", "")}.png`,
           statusen: users[i].en.status,
           namesurname: namee,
           idnum: users[i].ge.idnum,
@@ -103,7 +103,7 @@ async function card2png() {
           validate
         ),
         content: {
-          badge: `${hostname}/assets/img/card/${users[i].en.status}.png`,
+          badge: `${hostname}/assets/img/card/${users[i].en.status.replace(" ", "")}.png`,
           qr: QRValue,
           namesurname: nameen,
           idnum: users[i].ge.idnum,
