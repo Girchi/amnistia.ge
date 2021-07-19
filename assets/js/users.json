@@ -10,7 +10,7 @@
                 "b_date": "19.05.1982",
                 "validation": "13/09/2025",
                 "img": "/assets/img/users/იაგოხვიჩია.jpg",
-                "status": "მწეველი",
+                "status": "დამფუძნებელი",
                 "other_statuses": ["დამფუძნებელი"]
             },
 
@@ -22,7 +22,7 @@
                 "b_date": "19.05.1982",
                 "validation": "13/09/2025",
                 "img": "/assets/img/users/იაგოხვიჩია.jpg",
-                "status": "smoker",
+                "status": "founder",
                 "other_statuses": ["founder"]
             }
         },
@@ -37,7 +37,7 @@
                 "b_date": "28.02.1972",
                 "validation": "13/09/2025",
                 "img": "/assets/img/users/ვახტანგმეგრელიშვილი.jpg",
-                "status": "მწეველი",
+                "status": "დამფუძნებელი",
                 "other_statuses": ["დამფუძნებელი", "გროუერი"]
             },
 
@@ -50,7 +50,7 @@
                 "b_date": "28.02.1972",
                 "validation": "13/09/2025",
                 "img": "/assets/img/users/ვახტანგმეგრელიშვილი.jpg",
-                "status": "smoker",
+                "status": "founder",
                 "other_statuses": ["founder", "grower"]
             }
         },
@@ -65,7 +65,7 @@
                 "b_date": "08.06.1990",
                 "validation": "13/09/2025",
                 "img": "/assets/img/users/ლევანჯგერენაია.jpg",
-                "status": "მწეველი",
+                "status": "დამფუძნებელი",
                 "other_statuses": ["დამფუძნებელი"]
             },
 
@@ -77,7 +77,7 @@
                 "b_date": "08.06.1990",
                 "validation": "13/09/2025",
                 "img": "/assets/img/users/ლევანჯგერენაია.jpg",
-                "status": "smoker",
+                "status": "founder",
                 "other_statuses": ["founder"]
             }
         },
@@ -92,7 +92,7 @@
                 "b_date": "09.07.1991",
                 "validation": "13/09/2025",
                 "img": "/assets/img/users/ოთოზაკალაშვილი.jpg",
-                "status": "მწეველი",
+                "status": "დამფუძნებელი",
                 "other_statuses": ["დამფუძნებელი"]
             },
 
@@ -104,7 +104,7 @@
                 "b_date": "09.07.1991",
                 "validation": "13/09/2025",
                 "img": "/assets/img/users/ოთოზაკალაშვილი.jpg",
-                "status": "smoker",
+                "status": "founder",
                 "other_statuses": ["founder"]
             }
         },
@@ -119,7 +119,7 @@
                 "b_date": "14.02.2000",
                 "validation": "13/09/2025",
                 "img": "/assets/img/users/მარიამშენგელია.jpg",
-                "status": "მწეველი",
+                "status": "დამფუძნებელი",
                 "other_statuses": ["დამფუძნებელი"]
             },
 
@@ -131,7 +131,7 @@
                 "b_date": "14.02.2000",
                 "validation": "13/09/2025",
                 "img": "/assets/img/users/მარიამშენგელია.jpg",
-                "status": "smoker",
+                "status": "founder",
                 "other_statuses": ["founder"]
             }
         },
@@ -146,7 +146,7 @@
                 "b_date": "23.07.2003",
                 "validation": "13/09/2025",
                 "img": "/assets/img/users/რუსუდანაბუაშვილი.jpg",
-                "status": "მწეველი",
+                "status": "დამფუძნებელი",
                 "other_statuses": ["დამფუძნებელი"]
             },
 
@@ -158,7 +158,7 @@
                 "b_date": "23.07.2003",
                 "validation": "13/09/2025",
                 "img": "/assets/img/users/რუსუდანაბუაშვილი.jpg",
-                "status": "smoker",
+                "status": "founder",
                 "other_statuses": ["founder"]
             }
         },
@@ -227,7 +227,7 @@
                 "b_date": "20/07/1989",
                 "validation": "13/09/2025",
                 "img": "/assets/img/users/დავითწურწუმია.jpg",
-                "status": "მწეველი",
+                "status": "დამფუძნებელი",
                 "other_statuses": ["დამფუძნებელი"]
             },
 
@@ -240,7 +240,7 @@
                 "b_date": "20/07/1989",
                 "validation": "13/09/2025",
                 "img": "/assets/img/users/დავითწურწუმია.jpg",
-                "status": "smoker",
+                "status": "founder",
                 "other_statuses": ["founder"]
             }
         },
@@ -255,7 +255,7 @@
                 "b_date": "25/08/1998",
                 "validation": "13/09/2025",
                 "img": "/assets/img/users/ავთანდილლაბაძე.jpg",
-                "status": "მწეველი",
+                "status": "დამფუძნებელი",
                 "other_statuses": ["დამფუძნებელი"]
             },
 
@@ -267,7 +267,7 @@
                 "b_date": "25/08/1998",
                 "validation": "13/09/2025",
                 "img": "/assets/img/users/ავთანდილლაბაძე.jpg",
-                "status": "smoker",
+                "status": "founder",
                 "other_statuses": ["founder"]
             }
         }

@@ -3,6 +3,7 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import fetch from 'node-fetch';
 import * as fs from 'fs';
+import QRCode from "qrcode";
 
 const app = express();
 const port = 3000;
@@ -45,17 +46,34 @@ app.get("/constitution", (req, res) => {
 });
 
 // --------------------Card Sides----------------
+const generateQR = (text) => {
+    var opts = {
+      errorCorrectionLevel: "H",
+      type: "image/jpeg",
+      quality: 1,
+      margin: 0,
+      color: {
+        dark: "#000",
+        light: "#ffffff00",
+      },
+    };
+    let generatedval = QRCode.toDataURL(text, opts);
+    return generatedval;
+  };
+
 
 app.get("/user/:id", (req, res) => {
-    let obj={};
-    fetch('http://127.0.0.1:3000/assets/js/users.json')
-    .then(response => response.json())
-    .then(data => {
-        obj=data.data[req.params.id];
-    });
-    setTimeout(()=>{
+    async function fetchUsers() {
+        const response = await fetch(`http://127.0.0.1:3000/assets/js/users.json`);
+        const users = await response.json();
+    
+        let QRValue = await generateQR(`http://127.0.0.1:3000/user/${req.params.id}`);
+        let obj = users.data[req.params.id];
+        obj.qr = QRValue;
+    
         res.render(__dirname + "/snippet/profile", obj);
-    }, 100);
+      }
+      fetchUsers();
 })
 
 app.get("/cards-download", (req, res) => {
