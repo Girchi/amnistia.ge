@@ -71,11 +71,15 @@ body{
   }
   
   .left-style {
-      width: 38%;
-      height: 100%;
-      position: absolute;
-      background-color: #FCDBDB;
-      z-index: -5;
+    width: 46%;
+    height: 100%;
+    position: absolute;
+    z-index: -5;
+  }
+
+  .left-style svg {
+    width: 100%;
+    height: 100%;
   }
   
   
@@ -176,7 +180,11 @@ body{
   </style>
   <body><div id="cards" class="cards card-{{status}}">
   <div id="card-back" class="card-side">
-  <div class="left-style"></div>
+  <div class="left-style">
+    <svg xmlns="http://www.w3.org/2000/svg" width="145.519" height="200.274" viewBox="0 0 145.519 200.274">
+      <path id="Path_2" data-name="Path 2" d="M476.99,0c-1.171,0-64.788,37.464-7.415,93.134s21.856,107.139,21.856,107.139H356.781V0Z" transform="translate(-356.781)" fill="#fcdbdb"/>
+    </svg>
+  </div>
   <header class="card-header">AMNESTY SUPPORTERS SOCIETY</header>
     <main class="card-main">
     <div class="card-info">
