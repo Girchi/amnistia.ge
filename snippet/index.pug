@@ -22,33 +22,11 @@ head
 
   // Template Main CSS File
   link(href='assets/css/style.css' rel='stylesheet')
+
 // ======= Header =======
-header#header.fixed-top
-  .container.d-flex.align-items-center.justify-content-between
-    h1.logo
-      a(href='/')
-        img(src='assets/img/amnistia.png' alt='amnistia')
-    nav#navbar.navbar
-      ul
-        li
-          a.nav-link.scrollto.active(href='#hero') &#x10DB;&#x10D7;&#x10D0;&#x10D5;&#x10D0;&#x10E0;&#x10D8;
-        li
-          a.nav-link.scrollto(href='#about') &#x10E8;&#x10D4;&#x10E1;&#x10D0;&#x10EE;&#x10D4;&#x10D1;
-        li
-          a.nav-link.scrollto(href='#testimonials') &#x10EC;&#x10D4;&#x10D5;&#x10E0;&#x10D4;&#x10D1;&#x10D8;
-        li
-          a.nav-link.scrollto(href='#services') &#x10DE;&#x10E0;&#x10D8;&#x10DC;&#x10EA;&#x10D8;&#x10DE;&#x10D4;&#x10D1;&#x10D8;
-        li
-          a.nav-link.scrollto.o(href='#portfolio') &#x10DE;&#x10E0;&#x10DD;&#x10D3;&#x10E3;&#x10E5;&#x10E2;&#x10D4;&#x10D1;&#x10D8;
-        li
-          a.nav-link.scrollto(href='#team') &#x10D2;&#x10E3;&#x10DC;&#x10D3;&#x10D8;
-        li
-          a.nav-link.scrollto(href='#faq') &#x10EC;&#x10D4;&#x10D5;&#x10E0;&#x10DD;&#x10D1;&#x10D0;
-        li
-          a.getstarted.scrollto(href='https://www.girchi.com/ge/donate/amnistia') &#x10E8;&#x10D4;&#x10DB;&#x10DD;&#x10D2;&#x10D5;&#x10D8;&#x10D4;&#x10E0;&#x10D7;&#x10D3;&#x10D8;
-      i.bi.bi-list.mobile-nav-toggle
-    // .navbar
+include parts/header.pug
 // End Header
+
 // ======= Hero Section =======
 section#hero.d-flex
   .container.position-relative(data-aos='fade-up' data-aos-delay='100')
@@ -131,23 +109,7 @@ main#main
               i.bx.bx-check-double
               |  ჩამორთმეული  უფლებების აღდგენა, რათა ადამიანმა შეძლოს რესოციალიზაცია და სათანადო სამუშაოს პოვნა.
   // End About Video Section
-  //- // ======= Clients Section =======
-  //- section#clients.clients.section-bg
-  //-   .container
-  //-     .row
-  //-       .col-lg-2.col-md-4.col-6.d-flex.align-items-center.justify-content-center(data-aos='zoom-in')
-  //-         img.img-fluid(src='assets/img/clients/gclient-1.jpg' alt='')
-  //-       .col-lg-2.col-md-4.col-6.d-flex.align-items-center.justify-content-center(data-aos='zoom-in')
-  //-         img.img-fluid(src='assets/img/clients/gclient-2.webp' alt='')
-  //-       .col-lg-2.col-md-4.col-6.d-flex.align-items-center.justify-content-center(data-aos='zoom-in')
-  //-         img.img-fluid(src='assets/img/clients/gclient-3.jpg' alt='')
-  //-       .col-lg-2.col-md-4.col-6.d-flex.align-items-center.justify-content-center(data-aos='zoom-in')
-  //-         img.img-fluid(src='assets/img/clients/gclient-4.png' alt='')
-  //-       .col-lg-2.col-md-4.col-6.d-flex.align-items-center.justify-content-center(data-aos='zoom-in')
-  //-         img.img-fluid(src='assets/img/clients/gclient-5.png' alt='')
-  //-       .col-lg-2.col-md-4.col-6.d-flex.align-items-center.justify-content-center(data-aos='zoom-in')
-  //-         img.img-fluid(src='assets/img/clients/gclient-6.jpg' alt='')
-  //- // End Clients Section
+
   // ======= Testimonials Section =======
   section#testimonials.testimonials
     .container(data-aos='fade-up')
@@ -156,15 +118,15 @@ main#main
       .testimonials-slider.swiper-container(data-aos='fade-up' data-aos-delay='100')
         #latestUsers.swiper-wrapper
           ul#usersList.list-group
-          - for(let i = 0; i < 6; i++)
+          - for(let i = arr.length - 1; i > arr.length - 6; i--)
               .swiper-slide
                 .testimonial-item
-                  a(href=`user/${arr[i].id}`)         
+                  a(href=`user/${i}`)
                     img.testimonial-img(src=`${arr[i].img}` alt='user image')
-                  h3= `${arr[i].name} ${arr[i].surname}`
-                  h4= arr[i].status
+                    h3= `${arr[i].name} ${arr[i].surname}`
+                    h4= arr[i].status
         a.users-btn(href='users') &#x10E1;&#x10E0;&#x10E3;&#x10DA;&#x10D8; &#x10E1;&#x10D8;&#x10D0;
-        h3.usersCount (12335790)
+        //- h3.usersCount (12335790)
   // Modal - Full User List
   #usersModal.modal.fade(data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='usersModalLabel' aria-hidden='true')
     .modal-dialog
@@ -185,13 +147,6 @@ main#main
       .row
         .col-lg-4.col-md-6.d-flex.align-items-stretch(data-aos='zoom-in' data-aos-delay='100')
           .icon-box.iconbox-blue
-            //
-              <div class="icon">
-              <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-              <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,521.0016835830174C376.1290562159157,517.8887921683347,466.0731472004068,529.7835943286574,510.70327084640275,468.03025145048787C554.3714126377745,407.6079735673963,508.03601936045806,328.9844924480964,491.2728898941984,256.3432110539036C474.5976632858925,184.082847569629,479.9380746630129,96.60480741107993,416.23090153303,58.64404602377083C348.86323505073057,18.502131276798302,261.93793281208167,40.57373210992963,193.5410806939664,78.93577620505333C130.42746243093433,114.334589627462,98.30271207620316,179.96522072025542,76.75703585869454,249.04625023123273C51.97151888228291,328.5150500222984,13.704378332031375,421.85034740162234,66.52175969318436,486.19268352777647C119.04800174914682,550.1803526380478,217.28368757567262,524.383925680826,300,521.0016835830174"></path>
-              </svg>
-              <i class="bx bxl-dribbble"></i>
-              </div>
             h4
               a(href='#') მართვა
             p
@@ -225,14 +180,15 @@ main#main
               a(href='') დაფუძნება
             p საზოგადოება დაფუძნებულად ჩაითვლება 2021 წლის 12 აგვისტოს 4:20 საათიდან.
   // End Sevices Section
-  // ======= Portfolio Section =======
-  section#portfolio.portfolio
-    .container(data-aos='fade-up')
-      .section-title
-        h2 ამნისტიის შესახებ
-        p ჰუმანიზმის პრინციპიდან გამომდინარე, ერთჯერადი, დროებითი და განსაკუთრებული ღონისძიების სახით, საზოგადოებრივი საშიშროების ხარისხის გათვალისწინებით, ამ კანონის საფუძველზე, სისხლისსამართლებრივი პასუხისმგებლობისა და სასჯელისაგან თავისუფლდებიან საქართველოს სისხლის სამართლის კოდექსით (საქართველოს საკანონმდებლო მაცნე, №41(48), 1999 წელი, მუხ. 209) გათვალისწინებული ზოგიერთი დანაშაულის ჩადენისათვის ბრალდებული და მსჯავრდებული პირები, ასევე დანიშნული სასჯელი უმცირდებათ ან უფრო მსუბუქი სასჯელით ეცვლებათ ცალკეული დანაშაულების ჩადენისათვის მსჯავრდებულ პირებს.
-  
-  // End Portfolio Section
+
+  //- // ======= Portfolio Section =======
+  //- section#portfolio.portfolio
+  //-   .container(data-aos='fade-up')
+  //-     .section-title
+  //-       h2 ამნისტიის შესახებ
+  //-       p ჰუმანიზმის პრინციპიდან გამომდინარე, ერთჯერადი, დროებითი და განსაკუთრებული ღონისძიების სახით, საზოგადოებრივი საშიშროების ხარისხის გათვალისწინებით, ამ კანონის საფუძველზე, სისხლისსამართლებრივი პასუხისმგებლობისა და სასჯელისაგან თავისუფლდებიან საქართველოს სისხლის სამართლის კოდექსით (საქართველოს საკანონმდებლო მაცნე, №41(48), 1999 წელი, მუხ. 209) გათვალისწინებული ზოგიერთი დანაშაულის ჩადენისათვის ბრალდებული და მსჯავრდებული პირები, ასევე დანიშნული სასჯელი უმცირდებათ ან უფრო მსუბუქი სასჯელით ეცვლებათ ცალკეული დანაშაულების ჩადენისათვის მსჯავრდებულ პირებს.
+  //- // End Portfolio Section
+
   // ======= Team Section =======
   section#team.team.section-bg
     .container(data-aos='fade-up')
@@ -289,6 +245,7 @@ main#main
               h4 &#x10E1;&#x10D0;&#x10DC;&#x10D3;&#x10E0;&#x10DD; &#x10E0;&#x10D0;&#x10E5;&#x10D5;&#x10D8;&#x10D0;&#x10E8;&#x10D5;&#x10D8;&#x10DA;&#x10D8;
               span &#x10E1;&#x10D0;&#x10D1;&#x10ED;&#x10DD;&#x10E1; &#x10EC;&#x10D4;&#x10D5;&#x10E0;&#x10D8;
   // End Team Section
+
   // ======= Frequently Asked Questions Section =======
   section#faq.faq.section-bg
     .container(data-aos='fade-up')
@@ -344,86 +301,11 @@ main#main
                 | საზოგადოების წევრთა ვინაობა და მათი წვლილი საზოგადოებაში წარმოადგენს საჯარო ინფორმაციას.
   // End Frequently Asked Questions Section
 // End #main
+
 // ======= Footer =======
-footer#footer
-  .footer-top
-    .container
-      .row
-        .col-lg-3.col-md-6.footer-contact
-          h3 Amnistia.ge
-          p
-            | &#x10D7;&#x10D1;&#x10D8;&#x10DA;&#x10D8;&#x10E1;&#x10D8;
-            br
-            |               &#x10D7;&#x10D0;&#x10D5;&#x10D8;&#x10E1;&#x10E3;&#x10E4;&#x10DA;&#x10D4;&#x10D1;&#x10D8;&#x10E1; &#x10DB;&#x10DD;&#x10D4;&#x10D3;&#x10D0;&#x10DC;&#x10D8;
-            br
-            |               9 &#x10D0;&#x10DE;&#x10E0;&#x10D8;&#x10DA;&#x10D8;&#x10E1; &#x10E5;&#x10E3;&#x10E9;&#x10D0; #3/5
-            br
-            br
-            strong="ელფოსტა"
-            |  info@amnistia.ge
-            br
-        .col-lg-2.col-md-6.footer-links
-          h4 &#x10DC;&#x10D0;&#x10D5;&#x10D8;&#x10D2;&#x10D0;&#x10EA;&#x10D8;&#x10D0;
-          ul
-            li
-              i.bx.bx-chevron-right
-              a(href='#hero') &#x10DB;&#x10D7;&#x10D0;&#x10D5;&#x10D0;&#x10E0;&#x10D8;
-            li
-              i.bx.bx-chevron-right
-              a(href='#about') &#x10E9;&#x10D5;&#x10D4;&#x10DC;&#x10E1; &#x10E8;&#x10D4;&#x10E1;&#x10D0;&#x10EE;&#x10D4;&#x10D1;
-            li
-              i.bx.bx-chevron-right
-              a(href='#testimonials') &#x10EC;&#x10D4;&#x10D5;&#x10E0;&#x10D4;&#x10D1;&#x10D8;
-            li
-              i.bx.bx-chevron-right
-              a(href='#services') &#x10DE;&#x10E0;&#x10D8;&#x10DC;&#x10EA;&#x10D8;&#x10DE;&#x10D4;&#x10D1;&#x10D8;
-            li
-              i.bx.bx-chevron-right
-              a(href='#portfolio') &#x10DE;&#x10E0;&#x10DD;&#x10D3;&#x10E3;&#x10E5;&#x10E2;&#x10D4;&#x10D1;&#x10D8;
-            li
-              i.bx.bx-chevron-right
-              a(href='#team') &#x10D2;&#x10E3;&#x10DC;&#x10D3;&#x10D8;
-            li
-              i.bx.bx-chevron-right
-              a(href='#faq') &#x10EC;&#x10D4;&#x10D5;&#x10E0;&#x10DD;&#x10D1;&#x10D0;
-        .col-lg-3.col-md-6.footer-links
-          h4 &#x10DE;&#x10E0;&#x10D8;&#x10DC;&#x10EA;&#x10D8;&#x10DE;&#x10D4;&#x10D1;&#x10D8;
-          ul
-            li
-              i.bx.bx-chevron-right
-              |  &#x10DB;&#x10D0;&#x10E0;&#x10D7;&#x10D5;&#x10D0;
-            li
-              i.bx.bx-chevron-right
-              |  &#x10E8;&#x10D4;&#x10DB;&#x10DD;&#x10E1;&#x10D0;&#x10D5;&#x10DA;&#x10D4;&#x10D1;&#x10D8;
-            li
-              i.bx.bx-chevron-right
-              |  &#x10EE;&#x10D0;&#x10E0;&#x10EF;&#x10D4;&#x10D1;&#x10D8;
-            li
-              i.bx.bx-chevron-right
-              |  &#x10E1;&#x10D0;&#x10EF;&#x10D0;&#x10E0;&#x10DD;&#x10DD;&#x10D1;&#x10D0;
-            li
-              i.bx.bx-chevron-right
-              |  &#x10D9;&#x10DD;&#x10DC;&#x10E4;&#x10DA;&#x10D8;&#x10E5;&#x10E2;&#x10D4;&#x10D1;&#x10D8;
-            li
-              i.bx.bx-chevron-right
-              |  &#x10D3;&#x10D0;&#x10E4;&#x10E3;&#x10EB;&#x10DC;&#x10D4;&#x10D1;&#x10D0;
-  .container.d-md-flex.py-4
-    .me-md-auto.text-center.text-md-start
-      .copyright
-        | &copy; &#x10E7;&#x10D5;&#x10D4;&#x10DA;&#x10D0; &#x10E1;&#x10D0;&#x10D0;&#x10D5;&#x10E2;&#x10DD;&#x10E0;&#x10DD; &#x10E3;&#x10E4;&#x10DA;&#x10D4;&#x10D1;&#x10D8;&#x10E1; &#x10D7;&#x10D0;&#x10D5;&#x10D6;&#x10D4;&#x10EA; &#x10D2;&#x10D0;&#x10D5;&#x10D8;&#x10D0;&#x10E0;&#x10D4;&#x10D7;.
-        strong
-          span  &#x10D2;&#x10D8;&#x10E0;&#x10E9;&#x10D8;
-      .credits
-    .social-links.text-center.text-md-right.pt-3.pt-md-0
-      a.twitter(href='https://twitter.com/girchiparty' target='_blank')
-        i.bx.bxl-twitter
-      a.facebook(href='https://www.facebook.com/GirchiParty/' target='_blank')
-        i.bx.bxl-facebook
-      a.instagram(href='https://www.instagram.com/girchiparty/' target='_blank')
-        i.bx.bxl-instagram
-      a.linkedin(href='https://ge.linkedin.com/company/%E1%83%92%E1%83%98%E1%83%A0%E1%83%A9%E1%83%98-girchi' target='_blank')
-        i.bx.bxl-linkedin
+include parts/footer.pug
 // End Footer
+
 #preloader
 a.back-to-top.d-flex.align-items-center.justify-content-center(href='#')
   i.bi.bi-arrow-up-short
@@ -437,5 +319,3 @@ script(src='assets/vendor/purecounter/purecounter.js')
 script(src='assets/vendor/swiper/swiper-bundle.min.js')
 // Template Main JS File
 script(src='assets/js/main.js')
-script(src='assets/js/latestusers.js')
-

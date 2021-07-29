@@ -1,86 +1,144 @@
-import express, { response } from 'express'
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-import fetch from 'node-fetch';
-import * as fs from 'fs';
-import QRCode from "qrcode";
+import express, { response } from "express";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+import fetch from "node-fetch";
+import * as fs from "fs";
+import bodyParser from "body-parser";
+import multer from "multer";
+
+import convertLetters from "./assets/js/convertLetters.js";
+import generateQR from "./assets/js/generateQR.js";
 
 const app = express();
+
+const fileStorageEngine = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./assets/serverImages");
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${file.originalname}`);
+  },
+});
+
+const upload = multer({ storage: fileStorageEngine });
 const port = 3000;
-const hostname = '127.0.0.1';
+const hostname = "http://127.0.0.1:3000";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
 app.set("view engine", "pug");
-app.use("/assets", express.static('assets'));
+
+app.use("/assets", express.static("assets"));
 app.use("/generate", express.static("generate"));
 
-app.get("/", (req, res) => {
-    async function latestUsers() {
-        const userArray = await fetch('http://127.0.0.1:3000/assets/js/users.json');
-        const users = await userArray.json();
-        res.render(__dirname + "/snippet/index", {arr: users.data.map(element => element.ge)});
-    } try {
-        latestUsers();
-    } catch(error) {
-        console.log(error);
-    }
-});
+app.listen(port, "127.0.0.1", () =>
+  console.log(`Server running at ${hostname}`)
+);
 
-app.get("/users", (req, res) => {
-    async function callTheAPI() {
-        const response = await fetch('http://127.0.0.1:3000/assets/js/users.json');
-        const users = await response.json();
-        res.render(__dirname + "/snippet/users", {arr: users.data.map(element => element.ge)});
-    }
-    try {
-        callTheAPI();
-    } catch(error) {
-        console.log("Something went wrong..");
-        throw new Error(error);
-    }
-});
+(async () => {
+  const usersResponse = await fetch(`${hostname}/assets/js/users.json`);
+  const users = await usersResponse.json();
 
-app.get("/constitution", (req, res) => {
-    res.render(__dirname + "/snippet/constitution");
-});
+  const statusResponse = await fetch(`${hostname}/assets/js/statuses.json`);
+  const statuses = await statusResponse.json();
 
-// --------------------Card Sides----------------
-const generateQR = (text) => {
-    var opts = {
-      errorCorrectionLevel: "H",
-      type: "image/jpeg",
-      quality: 1,
-      margin: 0,
-      color: {
-        dark: "#000",
-        light: "#ffffff00",
-      },
+  // Home Page Route
+  app.get("/", (req, res) => {
+    res.render(__dirname + "/snippet/index", {
+      arr: users.data,
+    });
+  });
+
+  // Users Page Route
+  app.get("/users", (req, res) => {
+    res.render(__dirname + "/snippet/users", {
+      arr: users.data,
+    });
+  });
+
+  // User Cards Page Route
+  app.get("/user/:id", (req, res) => {
+    const data = users.data[req.params.id];
+    const otherData = {
+      name: convertLetters(data.name),
+      surname: convertLetters(data.surname),
+      status: statuses[data.status.replace(" ", "_")],
+      class: statuses[data.status.replace(" ", "_")].replace(" ", ""),
     };
-    let generatedval = QRCode.toDataURL(text, opts);
-    return generatedval;
-  };
 
+    (async () => {
+      const QRValue = await generateQR(`${hostname}/user/${req.params.id}`);
+      res.render(__dirname + "/snippet/profile", {
+        data,
+        otherData,
+        QRValue,
+      });
+    })();
+  });
 
-app.get("/user/:id", (req, res) => {
-    async function fetchUsers() {
-        const response = await fetch(`http://127.0.0.1:3000/assets/js/users.json`);
-        const users = await response.json();
-    
-        let QRValue = await generateQR(`http://127.0.0.1:3000/user/${req.params.id}`);
-        let obj = users.data[req.params.id];
-        obj.qr = QRValue;
-    
-        res.render(__dirname + "/snippet/profile", obj);
-      }
-      fetchUsers();
-})
+  // Customize Cards Page Routes
+  app.get("/custom-card", (req, res) => {
+    let data = {
+      name: "სახელი",
+      surname: "გვარი",
+      id_number: "0100101010",
+      birth_date: "08/04/2000",
+      status: "პატიმარი",
+      validation: "01/09/2030",
+    };
+    const otherData = {
+      name: "name",
+      surname: "surname",
+      status: "prisoner",
+      class: "prisoner",
+      card_number: 1000,
+    };
 
-app.get("/cards-download", (req, res) => {
+    (async () => {
+      const QRValue = await generateQR(`amnistia.ge`);
 
-    let arr=fs.readdirSync('assets/pdf')
-    res.render(__dirname + "/snippet/card-download", { arr: arr});
-});
+      res.render(__dirname + "/snippet/custom-card", {
+        data,
+        otherData,
+        QRValue,
+        image: `./assets/img/amnistia.png`,
+      });
+    })();
+  });
 
-app.listen(port, hostname, () => console.log(`Server running at http://${hostname}:${port}/`)); 
+  app.post(
+    "/custom-card",
+    [urlencodedParser, upload.single("image")],
+    (req, res) => {
+      const otherData = {
+        name: convertLetters(req.body.name),
+        surname: convertLetters(req.body.surname),
+        status: statuses[req.body.status],
+        class: statuses[req.body.status.replace(" ", "_")].replace(" ", ""),
+        card_number: 1000,
+      };
+
+      (async () => {
+        const QRValue = await generateQR(`amnistia.ge`);
+        res.render(__dirname + "/snippet/custom-card", {
+          data: req.body,
+          otherData,
+          QRValue,
+          image: `./assets/serverImages/${req.file.originalname}`,
+        });
+      })();
+    }
+  );
+
+  // Countitution Page Route
+  app.get("/constitution", (req, res) => {
+    res.render(__dirname + "/snippet/constitution");
+  });
+  
+  // Download PDFs Page Route
+  app.get("/cards-download", (req, res) => {
+    let PDFDirectory = fs.readdirSync("generate/pdf");
+    res.render(__dirname + "/snippet/card-download", { PDFDirectory });
+  });
+})();

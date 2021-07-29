@@ -3,7 +3,7 @@
 
 .user-search {
   height: fit-content;
-  margin-top: 10rem;
+  margin-top: 7rem;
 }
 #myInput {
   background-image: url("/css/searchicon.png");
@@ -77,7 +77,7 @@
   display: inline-block;
   padding: 3px 8px;
   border-radius: 4px;
-  background: #327f37;
+  background: #2e6631;
   color: #ffffff;
 }
 .user-info--text span {
@@ -218,6 +218,7 @@
 
 .card-info {
   margin-top: 20px;
+  text-transform: capitalize;
 }
 
 .card-info span {
@@ -238,7 +239,6 @@
   min-width: 130px;
   width: 130px;
   height: 160px;
-  margin-left: 8px;
 }
 
 .card-img img {
@@ -261,6 +261,7 @@
 }
 
 .card-footer * {
+  font-family: inherit;
   font-size: inherit;
 }
 
@@ -437,32 +438,17 @@
   }
 }
 
-.btn-default {
-  background: #327f37;
-  padding: 8px 20px;
-  border-radius: 4px;
-  color: #fff;
-  transition: 500ms ease;
-  margin-right: 1rem;
+
+/* Card Form Styles */
+.card-form {
+  margin-top: 6rem;
 }
 
-.btn-default:hover {
-  transform: scale(1.05);
-  color: #fff;
+.card-form .btn {
+  width: calc(100% - 20px);
+  margin: auto;
 }
 
-.btn-switch {
-  border: none;
-  padding: 0;
-  background-color: transparent;
-  font-size: 2.5rem;
-  color: #327f37;
-  cursor: none;
-  transition: 500ms ease;
-  line-height: 0;
-}
-
-.btn-switch:hover {
-  transform: scale(1.05);
-  color: #3f8d45;
+.card-form > div {
+  margin: 0;
 }

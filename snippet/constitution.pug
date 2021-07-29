@@ -21,49 +21,29 @@ head
   link(href='assets/vendor/swiper/swiper-bundle.min.css' rel='stylesheet')
   // Template Main CSS File
   link(href='assets/css/style.css' rel='stylesheet')
-// ======= Header =======
-header#header.fixed-top
-  .container.d-flex.align-items-center.justify-content-between
-    h1.logo
-      a(href='/')
-        img(src='assets/img/amnistia.png' alt='amnistia')
-    nav#navbar.navbar
-      ul
-        li
-          a.nav-link.scrollto.active(href='/') &#x10DB;&#x10D7;&#x10D0;&#x10D5;&#x10D0;&#x10E0;&#x10D8;
-        li
-          a.nav-link.scrollto(href='/#about') &#x10E8;&#x10D4;&#x10E1;&#x10D0;&#x10EE;&#x10D4;&#x10D1;
-        li
-          a.nav-link.scrollto(href='/#testimonials') &#x10EC;&#x10D4;&#x10D5;&#x10E0;&#x10D4;&#x10D1;&#x10D8;
-        li
-          a.nav-link.scrollto(href='/#services') &#x10DE;&#x10E0;&#x10D8;&#x10DC;&#x10EA;&#x10D8;&#x10DE;&#x10D4;&#x10D1;&#x10D8;
-        li
-          a.nav-link.scrollto.o(href='/#portfolio') &#x10DE;&#x10E0;&#x10DD;&#x10D3;&#x10E3;&#x10E5;&#x10E2;&#x10D4;&#x10D1;&#x10D8;
-        li
-          a.nav-link.scrollto(href='/#team') &#x10D2;&#x10E3;&#x10DC;&#x10D3;&#x10D8;
-        li
-          a.nav-link.scrollto(href='/#faq') &#x10EC;&#x10D4;&#x10D5;&#x10E0;&#x10DD;&#x10D1;&#x10D0;
-        li
-          a.getstarted.scrollto(href='https://www.girchi.com/donate/project/legalize') &#x10E8;&#x10D4;&#x10DB;&#x10DD;&#x10D2;&#x10D5;&#x10D8;&#x10D4;&#x10E0;&#x10D7;&#x10D3;&#x10D8;
-      i.bi.bi-list.mobile-nav-toggle
-    // .navbar
-// End Header
+
+  // ======= Header =======
+  include parts/header.pug
+  // End Header
+
 main#main
   section#constitution.constitution.section-bg
     .container
-      h1 არაფორმალური ორგანიზაცია „დიდი ამნისტიის მხარდამჭერთა“ საზოგადოების კონსტიტუცია
+      h1 არაფორმალური ორგანიზაცია „დიდი ამნისტიის მხარდამჭერთა საზოგადოების“ კონსტიტუცია
       p ჩვენ ვთვლით, რომ საქართველოში საბჭოთა კავშირის დაშლის შემდგომ არ მომხდარა სისხლის სამართლის პოლიტიკის არსებითი გადააზრება, არ გვიფიქრია იმაზე თუ როგორი უნდა იყოს დამოუკიდებელი საქართველოს სისხლის სამართლის პოლიტიკა, როგორი ქმედება უნდა ისჯებოდეს პატიმრობით, არ გვიფიქრია არც სასჯელთა რეალურ მიზნებზე და ოდენობაზე.
       | ამის და სხვა ბევრ მიზეზთა გამო, ქვეყანაში უამრავი პატიმარია, რომელიც დღეს  ციხეში არ უნდა იჯდეს ან ახალი ცხოვრებისთვის ერთ შანსს მაინც იმსახურებს.
-      section.wewant
+      section
         h2 მიზნები
-        h6 ამნისტია არის ჰუმანური აქტი, რომელიც გულისხმობს პატიებას და  მიზნად ისახავს დანაშაულის ჩამდენთა ხვედრის შემსუბუქებას.
-        h6 2021 წელს, მოსახლეობის რაოდენობასთან შეფარდებით, პატიმართა რაოდენობით საქართველო მესამე ადგილზეა ევროპაში, რუსეთისა და თურქეთის შემდეგ, რაც გამოწვეულია უსამართლო და მეტისმეტად მკაცრი სისხლის სამართლის პოლიტიკით.
+        p ამნისტია არის ჰუმანური აქტი, რომელიც გულისხმობს პატიებას და  მიზნად ისახავს დანაშაულის ჩამდენთა ხვედრის შემსუბუქებას.
+        p 2021 წელს, მთლიან მოსახლეობასთან შეფარდებით, პატიმართა რაოდენობით საქართველო მესამე ადგილზეა ევროპაში, რუსეთისა და თურქეთის შემდეგ, რაც გამოწვეულია უსამართლო და მეტისმეტად მკაცრი სისხლის სამართლის პოლიტიკით.
         br
-        p 1. კანაფთან და მის პროდუქტებთან დაკავშირებული დანაშაულები - სრული ამნისტია.
-        p 2. დანაშაულები, რომელთაც არ ჰყავთ დაზარალებული ან დაზარალებულმა აპატია დამნაშავეს - ამნისტია სასჯელის 50% -ის შემცირებით. 
-        p 3. ნებისმიერი სხვა დანაშაული - ამნისტია სასჯელის 20% - ის შემცირებით
-        p 4. უვადო პატიმრობა მისჯილებს - 30 წელი, მოხდილი წლების ჩათვლით.
-        p 5. ჩამორთმეული  უფლებების აღდგენა, რათა ადამიანმა შეძლოს რესოციალიზაცია და სათანადო სამუშაოს პოვნა.
+        p ჩვენ გვინდა:
+        ul
+          li კანაფთან და მის პროდუქტებთან დაკავშირებული დანაშაულები - სრული ამნისტია.
+          li დანაშაულები, რომელთაც არ ჰყავთ დაზარალებული ან დაზარალებულმა აპატია დამნაშავეს - ამნისტია სასჯელის 50% -ის შემცირებით. 
+          li ნებისმიერი სხვა დანაშაული - ამნისტია სასჯელის 20% - ის შემცირებით
+          li უვადო პატიმრობა მისჯილებს - 30 წელი, მოხდილი წლების ჩათვლით.
+          li ჩამორთმეული  უფლებების აღდგენა, რათა ადამიანმა შეძლოს რესოციალიზაცია და სათანადო სამუშაოს პოვნა.
 
 
       section
@@ -129,87 +109,11 @@ main#main
         p საზოგადოება შედგება დამფუძნებელი და შემოერთებული წევრებისაგან.
         p
           | საზოგადოება დაფუძნებულად ჩაითვლება 2021 წლის 12 აგვისტოდან. საზოგადოების დამფუძნებელი წევრები არიან ადამიანები და კომპანიები, რომლებიც ამ დრომდე გამოთქვამენ ამის სურვილს და გადაიხდიან საწევროს.
-// ======= Footer =======
-footer#footer
-  .footer-top
-    .container
-      .row
-        .col-lg-3.col-md-6.footer-contact
-          h3 amnistia.ge
-          p
-            | &#x10D7;&#x10D1;&#x10D8;&#x10DA;&#x10D8;&#x10E1;&#x10D8;
-            br
-            |               &#x10D7;&#x10D0;&#x10D5;&#x10D8;&#x10E1;&#x10E3;&#x10E4;&#x10DA;&#x10D4;&#x10D1;&#x10D8;&#x10E1; &#x10DB;&#x10DD;&#x10D4;&#x10D3;&#x10D0;&#x10DC;&#x10D8;
-            br
-            |               9 &#x10D0;&#x10DE;&#x10E0;&#x10D8;&#x10DA;&#x10D8;&#x10E1; &#x10E5;&#x10E3;&#x10E9;&#x10D0; #3/5
-            br
-            br
-            strong="ელფოსტა"
-            |  info@amnistia.ge
-            br
-        .col-lg-2.col-md-6.footer-links
-          h4 &#x10DC;&#x10D0;&#x10D5;&#x10D8;&#x10D2;&#x10D0;&#x10EA;&#x10D8;&#x10D0;
-          ul
-            li
-              i.bx.bx-chevron-right
-              a(href='/') &#x10DB;&#x10D7;&#x10D0;&#x10D5;&#x10D0;&#x10E0;&#x10D8;
-            li
-              i.bx.bx-chevron-right
-              a(href='/') &#x10E9;&#x10D5;&#x10D4;&#x10DC;&#x10E1; &#x10E8;&#x10D4;&#x10E1;&#x10D0;&#x10EE;&#x10D4;&#x10D1;
-            li
-              i.bx.bx-chevron-right
-              a(href='/') &#x10EC;&#x10D4;&#x10D5;&#x10E0;&#x10D4;&#x10D1;&#x10D8;
-            li
-              i.bx.bx-chevron-right
-              a(href='/') &#x10DE;&#x10E0;&#x10D8;&#x10DC;&#x10EA;&#x10D8;&#x10DE;&#x10D4;&#x10D1;&#x10D8;
-            li
-              i.bx.bx-chevron-right
-              a(href='/') &#x10DE;&#x10E0;&#x10DD;&#x10D3;&#x10E3;&#x10E5;&#x10E2;&#x10D4;&#x10D1;&#x10D8;
-            li
-              i.bx.bx-chevron-right
-              a(href='/') &#x10D2;&#x10E3;&#x10DC;&#x10D3;&#x10D8;
-            li
-              i.bx.bx-chevron-right
-              a(href='/') &#x10EC;&#x10D4;&#x10D5;&#x10E0;&#x10DD;&#x10D1;&#x10D0;
-        .col-lg-3.col-md-6.footer-links
-          h4 &#x10DE;&#x10E0;&#x10D8;&#x10DC;&#x10EA;&#x10D8;&#x10DE;&#x10D4;&#x10D1;&#x10D8;
-          ul
-            li
-              i.bx.bx-chevron-right
-              |  &#x10DB;&#x10D0;&#x10E0;&#x10D7;&#x10D5;&#x10D0;
-            li
-              i.bx.bx-chevron-right
-              |  &#x10E8;&#x10D4;&#x10DB;&#x10DD;&#x10E1;&#x10D0;&#x10D5;&#x10DA;&#x10D4;&#x10D1;&#x10D8;
-            li
-              i.bx.bx-chevron-right
-              |  &#x10EE;&#x10D0;&#x10E0;&#x10EF;&#x10D4;&#x10D1;&#x10D8;
-            li
-              i.bx.bx-chevron-right
-              |  &#x10E1;&#x10D0;&#x10EF;&#x10D0;&#x10E0;&#x10DD;&#x10DD;&#x10D1;&#x10D0;
-            li
-              i.bx.bx-chevron-right
-              |  &#x10D9;&#x10DD;&#x10DC;&#x10E4;&#x10DA;&#x10D8;&#x10E5;&#x10E2;&#x10D4;&#x10D1;&#x10D8;
-            li
-              i.bx.bx-chevron-right
-              |  &#x10D3;&#x10D0;&#x10E4;&#x10E3;&#x10EB;&#x10DC;&#x10D4;&#x10D1;&#x10D0;
-  .container.d-md-flex.py-4
-    .me-md-auto.text-center.text-md-start
-      .copyright
-        | &copy; &#x10E7;&#x10D5;&#x10D4;&#x10DA;&#x10D0; &#x10E3;&#x10E4;&#x10DA;&#x10D4;&#x10D1;&#x10D8;&#x10E1; &#x10D7;&#x10D0;&#x10D5;&#x10D6;&#x10D4;&#x10EA; &#x10D2;&#x10D0;&#x10D5;&#x10D8;&#x10D0;&#x10E0;&#x10D4;&#x10D7;.
-        strong
-          span  &#x10D2;&#x10D8;&#x10E0;&#x10E9;&#x10D8;
-      .credits
-        // გვკიდია ლიცენზია. პატივისცემით ლაშა, ნიკა, გიორგი
-    .social-links.text-center.text-md-right.pt-3.pt-md-0
-      a.twitter(href='https://twitter.com/girchiparty' target='_blank')
-        i.bx.bxl-twitter
-      a.facebook(href='https://www.facebook.com/GirchiParty/' target='_blank')
-        i.bx.bxl-facebook
-      a.instagram(href='https://www.instagram.com/girchiparty/' target='_blank')
-        i.bx.bxl-instagram
-      a.linkedin(href='https://ge.linkedin.com/company/%E1%83%92%E1%83%98%E1%83%A0%E1%83%A9%E1%83%98-girchi' target='_blank')
-        i.bx.bxl-linkedin
-// End Footer
+  
+  // ======= Footer =======
+  include parts/footer.pug
+  // End Footer
+
 #preloader
 a.back-to-top.d-flex.align-items-center.justify-content-center(href='#')
   i.bi.bi-arrow-up-short

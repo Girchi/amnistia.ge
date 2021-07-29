@@ -23,20 +23,46 @@ head
   link(href='/assets/css/style.css' rel='stylesheet')
   link(href='/assets/css/user.css' rel='stylesheet')
 
-// ======= Header =======
-include parts/header.pug
-// End Header
+  // ======= Header =======
+  include parts/header.pug
+  // End Header
 
-// ======= Main =======
-#userinfo-container.container.pb-4
-  .user-info
-    img.user-info--pic(src=`${data.img}` alt='')
-    .user-info--text
-      h4= `${data.name} ${data.surname}`
-      span.main-status= data.status
-      each val in data.other_statuses
-        span= val
+  // ======= Main =======
+.container
+  form#card-form.card-form.row(action='http://127.0.0.1:3000/custom-card' method='POST' enctype="multipart/form-data")
+    .mb-3.col-12.col-sm-6.col-lg-4
+      label.form-label სახელი და გვარი
+      input.form-control(type='text' id="nameInput" name="name" )
+    .mb-3.col-12.col-sm-6.col-lg-4
+      label.form-label პირადი ნომერი
+      input.form-control(type='text' id="idNumInput" name="id_number" maxlength='11' )
+    .mb-3.col-12.col-sm-6.col-lg-4
+      label.form-label დაბადების თარიღი
+      input.form-control(type='date' id="dateInput" name="birth_date" maxlength='5' )
+    .mb-3.col-12.col-sm-6.col-lg-4
+      label.form-label სტატუსის არჩევა
+      select.form-select(name='status' id="statusInput")
+        option(value='პატიმარი') პატიმარი
+        option(value='ადვოკატი') ადვოკატი
+        option(value='ქომაგი') ქომაგი
+        option(value='დამფუძნებელი') დამფუძნებელი
+        option(value='ინვესტორი') ინვესტორი
+        option(value='ოქროს_ინვესტორი') ოქროს ინვესტორი
+    .mb-3.col-12.col-sm-6.col-lg-4
+      label.form-label ბარათის ნომერი
+      input.form-control(type='text' id="cardNumInput" name="card_number" )
+    .mb-3.col-12.col-sm-6.col-lg-4
+      label.form-label ამოწურვის ვადა
+      input.form-control(type='date' name="validation" id="validInput" )
+    .mb-3.col-12.col-sm-6.col-lg-4
+      label.form-label.w-100 ფოტოს ატვირთვა
+      input.form-control-file(type='file' for='image' id="imageInput" name="image" value='Choose Image' )
 
+    button.btn.btn-success(type='submit') გენერირება
+
+
+
+#userinfo-container.container.pb-4  
   #cards.cards(class=`card-${otherData.class}`)
     #card-front.card-side
       div.left-style
@@ -54,9 +80,9 @@ include parts/header.pug
           span &#x10DE;&#x10D8;&#x10E0;&#x10D0;&#x10D3;&#x10D8; &#x10DC;&#x10DD;&#x10DB;&#x10D4;&#x10E0;&#x10D8;
           h4#cardIdNum= data.id_number
           span &#x10DC;&#x10DD;&#x10DB;&#x10D4;&#x10E0;&#x10D8;
-          h4#cardNum= data.card_number
+          h4#cardNum= otherData.card_number
         #card-img.card-img
-          img#cardImage.img-fluid(src=data.img alt='user')
+          img#cardImage.img-fluid(src=image alt='user')
       footer.card-footer
         .bedge
           .bedge-icon
@@ -81,7 +107,7 @@ include parts/header.pug
           span Personal Number
           h4#cardIdNum= data.id_number
           span Number
-          h4#cardNum= data.card_number
+          h4#cardNum= otherData.card_number
         #card-img.card-img
           .card-qrcode
             img(src= QRValue)
@@ -112,3 +138,4 @@ script(src='/assets/vendor/purecounter/purecounter.js')
 script(src='/assets/vendor/swiper/swiper-bundle.min.js')
 // Template Main JS File
 script(src='/assets/js/main.js')
+script(type="module" src='/assets/js/customizeCard.js')
