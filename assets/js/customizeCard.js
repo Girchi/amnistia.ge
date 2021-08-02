@@ -11,6 +11,7 @@ const cardStatus = document.querySelectorAll("#cardStatus");
 const cardValid = document.querySelectorAll("#cardValid");
 const cardBadge = document.querySelectorAll("#cardBadge");
 
+// Changes data on input with keyboard
 function changeInputData() {
   const nameValue = document.getElementById("nameInput").value;
   const idNumValue = document.getElementById("idNumInput").value;
@@ -31,6 +32,7 @@ function changeInputData() {
   }
 }
 
+// Changes data on select item
 async function changeSelectData() {
   const dateValue = document
     .getElementById("dateInput")
@@ -64,10 +66,8 @@ async function changeSelectData() {
 
 cardForm.addEventListener("keyup", changeInputData);
 cardForm.addEventListener("change", changeSelectData);
-cardForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-});
 
+// Import image on browser
 const imageInput = document.getElementById("imageInput");
 const cardImage = document.querySelector("#cardImage");
 

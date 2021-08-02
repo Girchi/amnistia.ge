@@ -63,7 +63,7 @@ head
 
 
 #userinfo-container.container.pb-4  
-  #cards.cards(class=`card-${otherData.class}`)
+  #cards.cards(class=`card-prisoner`)
     #card-front.card-side
       div.left-style
         svg(xmlns='http://www.w3.org/2000/svg' width='145.519' height='200.274' viewbox='0 0 145.519 200.274')
@@ -73,24 +73,24 @@ head
       main.card-main
         .card-info
           span &#x10E1;&#x10D0;&#x10EE;&#x10D4;&#x10DA;&#x10D8; &#x10D2;&#x10D5;&#x10D0;&#x10E0;&#x10D8;
-          h4#cardFullName= `${data.name} ${data.surname}`
+          h4#cardFullName სახელი გვარი
           span &#x10D3;&#x10D0;&#x10D1;&#x10D0;&#x10D3;&#x10D4;&#x10D1;&#x10D8;&#x10E1; &#x10D7;&#x10D0;&#x10E0;&#x10D8;&#x10E6;&#x10D8;
-          h4#cardDate= data.birth_date
+          h4#cardDate 08/04/2000
         .card-info
           span &#x10DE;&#x10D8;&#x10E0;&#x10D0;&#x10D3;&#x10D8; &#x10DC;&#x10DD;&#x10DB;&#x10D4;&#x10E0;&#x10D8;
-          h4#cardIdNum= data.id_number
+          h4#cardIdNum 0100101010
           span &#x10DC;&#x10DD;&#x10DB;&#x10D4;&#x10E0;&#x10D8;
-          h4#cardNum= otherData.card_number
+          h4#cardNum 1000
         #card-img.card-img
-          img#cardImage.img-fluid(src=image alt='user')
+          img#cardImage.img-fluid(src='/assets/img/amnistia.png' alt='user')
       footer.card-footer
         .bedge
           .bedge-icon
-            img#cardBadge.img-fluid(src=`/assets/img/card/${otherData.class}.png` alt='badge')
-          div#cardStatus= data.status.replace('_', ' ')
+            img#cardBadge.img-fluid(src=`/assets/img/card/prisoner.png` alt='badge')
+          div#cardStatus პატიმარი
         div
           | &#x10EB;&#x10D0;&#x10DA;&#x10D0;&#x10E8;&#x10D8;&#x10D0;: 
-          span#cardValid= data.validation
+          span#cardValid 01/09/2030
     #card-back.card-side
       div.left-style
         svg(xmlns='http://www.w3.org/2000/svg' width='145.519' height='200.274' viewbox='0 0 145.519 200.274')
@@ -100,25 +100,25 @@ head
       main.card-main
         .card-info
           span Name Surname
-          h4#cardFullName= `${otherData.name} ${otherData.surname}`
+          h4#cardFullName name surname
           span Birth Date
-          h4#cardDate= data.birth_date
+          h4#cardDate 08/04/2000
         .card-info
           span Personal Number
-          h4#cardIdNum= data.id_number
+          h4#cardIdNum 0100101010
           span Number
-          h4#cardNum= otherData.card_number
+          h4#cardNum 1000
         #card-img.card-img
           .card-qrcode
-            img(src= QRValue)
+            img(src="/assets/img/amnistiaqr.png")
       footer.card-footer
         .bedge
           .bedge-icon
-            img#cardBadge.img-fluid(src=`/assets/img/card/${otherData.class}.png` alt='badge')
-          div#cardStatus= otherData.status
+            img#cardBadge.img-fluid(src=`/assets/img/card/prisoner.png` alt='badge')
+          div#cardStatus prisoner
         div
           | VALID: 
-          span#cardValid= data.validation
+          span#cardValid 01/09/2030
 
  
 // ======= Footer =======

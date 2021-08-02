@@ -34,7 +34,7 @@ include parts/header.pug
   ul#myUL
     each user in arr
       li
-        a.user--li(href=`user/${arr.indexOf(user)}`)
+        a.user--li(href=`user/${user.card_number}`)
           img.user-pic(src=`${user.img}`)
           span.user--name= `${user.name} ${user.surname}`
   br
