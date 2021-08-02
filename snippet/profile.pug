@@ -37,7 +37,7 @@ include parts/header.pug
       each val in data.other_statuses
         span= val
 
-  #cards.cards(class=`card-${otherData.class}`)
+  #cards.cards(class=`card-${engData.class}`)
     #card-front.card-side
       div.left-style
         svg(xmlns='http://www.w3.org/2000/svg' width='145.519' height='200.274' viewbox='0 0 145.519 200.274')
@@ -60,7 +60,7 @@ include parts/header.pug
       footer.card-footer
         .bedge
           .bedge-icon
-            img#cardBadge.img-fluid(src=`/assets/img/card/${otherData.class}.png` alt='badge')
+            img#cardBadge.img-fluid(src=`/assets/img/card/${engData.class}.png` alt='badge')
           div#cardStatus= data.status.replace('_', ' ')
         div
           | &#x10EB;&#x10D0;&#x10DA;&#x10D0;&#x10E8;&#x10D8;&#x10D0;: 
@@ -74,7 +74,7 @@ include parts/header.pug
       main.card-main
         .card-info
           span Name Surname
-          h4#cardFullName= `${otherData.name} ${otherData.surname}`
+          h4#cardFullName= `${engData.name} ${engData.surname}`
           span Birth Date
           h4#cardDate= data.birth_date
         .card-info
@@ -88,8 +88,8 @@ include parts/header.pug
       footer.card-footer
         .bedge
           .bedge-icon
-            img#cardBadge.img-fluid(src=`/assets/img/card/${otherData.class}.png` alt='badge')
-          div#cardStatus= otherData.status
+            img#cardBadge.img-fluid(src=`/assets/img/card/${engData.class}.png` alt='badge')
+          div#cardStatus= engData.status
         div
           | VALID: 
           span#cardValid= data.validation

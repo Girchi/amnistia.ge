@@ -21,10 +21,10 @@ const hostname = "http://127.0.0.1:3000";
   for (let i = 0; i < users.length; i++) {
     const frontPath = `./generate/card-imgs/${users[i].card_number}-front.jpg`;
     const backPath = `./generate/card-imgs/${users[i].card_number}-back.jpg`;
-    const QRValue = await generateQR(`${hostname}/user/${i}`);
+    const QRValue = await generateQR(`amnistia.ge/user/${users[i].card_number}`);
 
     if (!fs.existsSync(frontPath)) {
-      nodeHtmlToImage({
+      await nodeHtmlToImage({
         output: `./generate/card-imgs/${users[i].card_number}-front.jpg`,
         html: generateCardTemplateGe(),
         content: {
@@ -38,10 +38,10 @@ const hostname = "http://127.0.0.1:3000";
           status: users[i].status,
           class: statuses[users[i].status.replace(" ", "_")].replace(" ", ""),
         },
-      }).then(() => console.log(`${i} frontcard created successfully!'`));
+      }).then(() => console.log(`${users[i].card_number} frontcard created successfully!'`));
     }
     if (!fs.existsSync(backPath)) {
-      nodeHtmlToImage({
+      await nodeHtmlToImage({
         output: `./generate/card-imgs/${users[i].card_number}-back.jpg`,
         html: generateCardTemplateEn(),
         content: {
@@ -56,7 +56,7 @@ const hostname = "http://127.0.0.1:3000";
           statusEN: statuses[users[i].status.replace(" ", "_")],
           QRValue: QRValue,
         },
-      }).then(() => console.log(`${i} backcard created successfully!'`));
+      }).then(() => console.log(`${users[i].card_number} backcard created successfully!'`));
     }
   }
   console.log("Works...");

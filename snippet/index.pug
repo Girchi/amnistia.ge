@@ -121,7 +121,7 @@ main#main
           - for(let i = arr.length - 1; i > arr.length - 6; i--)
               .swiper-slide
                 .testimonial-item
-                  a(href=`user/${i}`)
+                  a(href=`user/${arr[i].card_number}`)
                     img.testimonial-img(src=`${arr[i].img}` alt='user image')
                     h3= `${arr[i].name} ${arr[i].surname}`
                     h4= arr[i].status
