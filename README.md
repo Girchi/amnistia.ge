@@ -5,7 +5,7 @@ Default configuration
 
 
 For FB authorization
-1. if you don't have, create FB application at https://developers.facebook.com/
+1. if you don't already have a FB application, create at https://developers.facebook.com/
 2. change the FB_APP_ID variable with your application ID:
 ```ruby
   assets/js/authorization.js
