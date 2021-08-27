@@ -1,4 +1,5 @@
-const hostname = "http://127.0.0.1:3000";
+import dotenv from "dotenv"
+dotenv.config()
 
 const generateCardTemplateEn = function () {
   return `
@@ -39,7 +40,7 @@ const generateCardTemplateEn = function () {
         content: "";
         width: 450px;
         height: 400px;
-        background: url("${hostname}/assets/img/card/amnistia.png") no-repeat center/contain;
+        background: url("${process.env.HOSTNAME}/assets/img/card/amnistia.png") no-repeat center/contain;
         position: absolute;
         left: 50px;
         top: 50px;
@@ -153,8 +154,7 @@ const generateCardTemplateEn = function () {
   </style>
 
   <body>
-  <div id="cards" class="cards card-{{class}}">
-    <div id="card-back" class="card-side">
+  <div id="card-back" class="card-side">
     <div class="left-style">
         <svg xmlns="http://www.w3.org/2000/svg" width="145.519" height="200.274" viewBox="0 0 145.519 200.274">
             <path id="Path_2" data-name="Path 2" d="M476.99,0c-1.171,0-64.788,37.464-7.415,93.134s21.856,107.139,21.856,107.139H356.781V0Z" transform="translate(-356.781)" fill="#fcdbdb"/>
@@ -164,7 +164,7 @@ const generateCardTemplateEn = function () {
         <main class="card-main">
         <div class="card-info">
         <span>name surname</span>
-        <h4>{{nameEN}} {{surnameEN}}</h4>
+        <h4>{{name}}</h4>
         <span>date of birth</span>
         <h4>{{birth_date}}</h4>
         </div>
@@ -183,16 +183,15 @@ const generateCardTemplateEn = function () {
         <footer class="card-footer">
         <div class="bedge">
             <div class="bedge-icon">
-                <img class="img-fluid" src="${hostname}/assets/img/card/{{class}}.png" alt="bedge">
+                <img class="img-fluid" src="${process.env.HOSTNAME}/assets/img/card/{{class}}.png" alt="bedge">
             </div>
-            {{statusEN}}
+            {{status}}
         </div>
         <div>
-            VALID: <span>{{validation}}</span>
+            Registered: <span>{{registration}}</span>
         </div>
-        </footer>
+      </footer>
     </div>
-  </div>
   </body>
 </html>`;
 };

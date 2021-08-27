@@ -1,60 +1,36 @@
-doctype html
-head
-  meta(charset='utf-8')
-  meta(content='width=device-width, initial-scale=1.0' name='viewport')
-  title დიდი ამნისტია
-  meta(content='' name='description')
-  meta(content='' name='keywords')
-  // Favicons
-  link(href='/assets/img/amnistia.png' rel='icon')
-  link(href='/assets/img/apple-touch-icon.png' rel='apple-touch-icon')
-  // Google Fonts
-  link(href='https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i' rel='stylesheet')
-  link(rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.1/css/all.css' integrity='sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf' crossorigin='anonymous')
-  // Vendor CSS Files
-  link(href='/assets/vendor/aos/aos.css' rel='stylesheet')
-  link(href='/assets/vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet')
-  link(href='/assets/vendor/bootstrap-icons/bootstrap-icons.css' rel='stylesheet')
-  link(href='/assets/vendor/boxicons/css/boxicons.min.css' rel='stylesheet')
-  link(href='/assets/vendor/glightbox/css/glightbox.min.css' rel='stylesheet')
-  link(href='/assets/vendor/remixicon/remixicon.css' rel='stylesheet')
-  link(href='/assets/vendor/swiper/swiper-bundle.min.css' rel='stylesheet')
-  // Template Main CSS File
-  link(href='/assets/css/style.css' rel='stylesheet')
-  link(href='/assets/css/user.css' rel='stylesheet')
+// ======= Head =======
+include parts/head.pug
+// End Head
+
+// Template CSS Files
+link(href='/assets/css/style.css' rel='stylesheet')
+link(href='/assets/css/user.css' rel='stylesheet')
 
 // ======= Header =======
 include parts/header.pug
 // End Header
 
-// user search
+// User Search
 .user-search.container
-  h5 &#x10DB;&#x10DD;&#x10DB;&#x10EE;&#x10DB;&#x10D0;&#x10E0;&#x10D4;&#x10D1;&#x10DA;&#x10D4;&#x10D1;&#x10D8;
-  input#myInput(type='text' onkeyup='myFunction()' placeholder='ძიება....' title='Type in a name')
-  ul#myUL
-    each user in arr
+  h5 მომხმარებლები
+  input#searchInput(type='text' placeholder='ძიება....')
+  ul#usersList
+    each user in usersList
       li
-        a.user--li(href=`user/${user.card_number}`)
-          img.user-pic(src=`${user.img}`)
-          span.user--name= `${user.name} ${user.surname}`
+        a.list-user(href=`user/${user.user_id}`)
+          img.user-img(src= user.img)
+          span.user-name= user.name
   br
-  p#underUl= `სულ მომხმარებელთა რაოდენობა - ${arr.length}`             
-
+  p#underUl= `სულ მომხმარებელთა რაოდენობა - ${usersList.length}` 
+                  
 // ======= Footer =======
 include parts/footer.pug
 // End Footer
 
-#preloader
-a.back-to-top.d-flex.align-items-center.justify-content-center(href='#')
-  i.bi.bi-arrow-up-short
-// Vendor JS Files
-script(src='/assets/vendor/aos/aos.js')
-script(src='/assets/vendor/bootstrap/js/bootstrap.bundle.min.js')
-script(src='/assets/vendor/glightbox/js/glightbox.min.js')
-script(src='/assets/vendor/isotope-layout/isotope.pkgd.min.js')
-script(src='/assets/vendor/php-email-form/validate.js')
-script(src='/assets/vendor/purecounter/purecounter.js')
-script(src='/assets/vendor/swiper/swiper-bundle.min.js')
+// ======= Scripts =======
+include parts/scripts.pug
+// End Scripts
+
 // Template Main JS File
 script(src='/assets/js/main.js')
-script(src='/assets/js/userSearchFilter.js')
+script(src='/assets/js/searchFilter.js')

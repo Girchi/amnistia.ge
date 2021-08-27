@@ -1,12 +1,8 @@
 @import url("//cdn.web-fonts.ge/fonts/bpg-web-002/css/bpg-web-002.min.css");
 @import url("//cdn.web-fonts.ge/fonts/bpg-nino-mtavruli-bold/css/bpg-nino-mtavruli-bold.min.css");
 
-.user-search {
-  height: fit-content;
-  margin-top: 7rem;
-}
-#myInput {
-  background-image: url("/css/searchicon.png");
+/* All Users Page */
+#searchInput {
   background-position: 10px 12px;
   background-repeat: no-repeat;
   width: 100%;
@@ -18,14 +14,14 @@
   margin-top: 20px;
 }
 
-#myUL {
+#usersList {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
 
-#myUL li a {
-  margin-top: 10px; /* Prevent double borders */
+#usersList li a {
+  margin-top: 10px;
   background-color: #f6f6f6;
   padding: 12px;
   text-decoration: none;
@@ -34,119 +30,125 @@
   display: block;
 }
 
-#myUL li a:hover:not(.header) {
+#usersList li a:hover:not(.header) {
   background-color: #eee;
 }
 
-.user-pic {
+.user-search {
+  margin-top: 2rem;
+}
+
+.list-user {
+  margin-top: 0.8rem;
+}
+
+.list-user .user-img {
   width: 40px;
   height: 40px;
   border-radius: 50px;
   object-fit: cover;
 }
-.user--name {
+.list-user .user-name {
   margin-left: 1rem;
   font-size: 0.9rem;
 }
-.user--li {
-  margin-top: 0.8rem;
-}
+
 
 /* User Page Styles */
-.user-info {
-  margin: 6rem 0 1rem;
+.profile-header {
   height: 150px;
   display: grid;
   grid-template-columns: 1fr 9fr 1fr;
   justify-content: space-between;
   align-items: center;
+  margin-top: 1.5rem;
 }
 
-.user-info--pic {
+.profile-header .user-img {
   width: 150px;
   height: 150px;
   object-fit: cover;
   border-radius: 50%;
 }
 
-.user-info--text {
+.profile-header .user-text {
   flex: 1;
   margin-left: 32px;
 }
-.user-info--text .main-status {
+
+.profile-header .user-text .main-status {
   display: inline-block;
   padding: 3px 8px;
   border-radius: 4px;
   background: #2e6631;
   color: #ffffff;
 }
-.user-info--text span {
+
+.profile-header .user-text span {
   display: inline-block;
   margin-right: 16px;
 }
 
-.quote {
-  text-align: justify;
+.edit-btn {
+  display: none;
+  text-align: end;
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
 }
 
-/* User LowerScreen Sizes */
+.edit-btn-active {
+  display: block;
+}
+
+/* Screens Lower than 768px */
 @media (max-width: 768px) {
-  .user-info {
-    margin: 6rem 0 1rem;
+  .profile-header {
     height: 75px;
   }
 
-  .user-info--pic {
+  .profile-header .user-img {
     width: 75px;
     height: 75px;
   }
-  .user-info--text {
+  
+  .profile-header .user-text {
     flex: 1;
     margin-left: 9px;
   }
-  .user-info--text h4 {
+
+  .profile-header .user-text h4 {
     font-size: 18px;
     margin-bottom: 6px;
   }
-  .user-info--text span {
-    font-size: 14px;
-  }
-  .quote {
+
+  .profile-header .user-text span {
     font-size: 14px;
   }
 }
 
+/* Screens Lower than 768px */
 @media (max-width: 420px) {
-  .user-info {
+  .profile-header {
     height: auto;
     grid-template-columns: 1fr 1fr;
   }
 
-  .user-info--pic {
+  .profile-header .user-img {
     order: 1;
   }
-  #qrcode {
+
+  .profile-header .edit-btn {
     order: 2;
     justify-self: flex-end;
   }
-  .user-info--text {
+
+  .profile-header .user-text {
     grid-column: 1/3;
     order: 3;
-    margin: 8px 0 0;
+    margin: 12px 0 0;
   }
 }
 
-/*QR Code */
-#qrcode {
-  width: 150px;
-  height: 100%;
-}
-
-#qrcode img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 
 /* Card Styles */
 .cards {
@@ -156,7 +158,7 @@
   margin: 2rem 0;
 }
 
-.card-side {
+.cards .card-side {
   font-family: "BPG Nino Mtavruli Bold", sans-serif;
   font-weight: 400;
   width: 166.6mm;
@@ -171,7 +173,7 @@
   border: 1px solid #ccc;
 }
 
-.card-side::before {
+.cards .card-side::before {
   content: "";
   width: 450px;
   height: 400px;
@@ -184,22 +186,16 @@
   z-index: -10;
 }
 
-.left-style {
-    width: 46%;
-    height: 100%;
-    position: absolute;
-    left: -1px;
-    z-index: -5;
-}
-
-.left-style svg {
-  width: 100%;
+.cards svg {
+  width: 46%;
   height: 100%;
+  position: absolute;
+  left: -1px;
+  z-index: -5;
+
 }
 
-
-
-.card-header {
+.cards header {
   background-color: transparent;
   padding: 40px 40px 0 40px;
   border: 0;
@@ -208,7 +204,7 @@
   margin-bottom: 24px;
 }
 
-.card-main {
+.cards main {
   display: flex;
   justify-content: space-between;
   padding: 0 40px;
@@ -216,38 +212,33 @@
   gap: 4px;
 }
 
-.card-info {
+.cards .card-col {
   margin-top: 20px;
   text-transform: capitalize;
 }
 
-.card-info span {
+.cards main span {
   font-family: "BPG WEB 002", sans-serif;
   display: block;
   font-size: 12px;
   color: #6a6a6a;
 }
 
-.card-info h4 {
+.cards main h4 {
   font-family: inherit;
   font-size: 22px;
   color: #040505;
   margin-bottom: 12px;
 }
 
-.card-img {
+.cards .card-img {
   min-width: 130px;
   width: 130px;
   height: 160px;
-}
-
-.card-img img {
-  width: 100%;
-  height: 100%;
   object-fit: cover;
 }
 
-.card-footer {
+.cards footer {
   background-color: transparent;
   padding: 24px 40px 24px;
   border: 0;
@@ -260,195 +251,108 @@
   z-index: 10;
 }
 
-.card-footer * {
+.cards footer * {
   font-family: inherit;
   font-size: inherit;
 }
 
-.bedge {
+.cards .card-status {
   display: flex;
   align-items: center;
   text-transform: uppercase;
 }
 
-.bedge-icon {
+.cards .card-status img{
   width: 60px;
   height: 60px;
   border-radius: 50%;
   margin-right: 12px;
   margin-bottom: 12px;
-}
-
-.bedge-icon .img-fluid {
-  width: 100%;
-  height: 100%;
   object-fit: cover;
 }
 
+/* Card sizes on lower screens */
 @media (max-width: 1400px) {
-  .card-side {
-    width: 142.8mm;
-    height: 90mm;
-  }
-  .card-side::before {
-    width: 330px;
-    height: 330px;
-    left: 85px;
-    top: 20px;
-  }
-  .card-img {
-    min-width: 110px;
-    width: 110px;
-    height: 140px;
-  }
-  .card-header {
-    padding: 30px 30px 0 30px;
-    font-size: 23px;
-    margin-bottom: 10px;
-  }
-  .card-main {
-    padding: 0 30px;
-  }
-  .card-main h4 {
-    font-size: 20px;
-  }
-  .card-footer {
-    padding: 16px 30px 12px;
+  .cards {
+    width: 1300px;
+    transform: scale(0.9) translateX(-7.5%);
   }
 }
 
 @media (max-width: 1200px) {
   .cards {
+    transform: scale(0.7) translate(-20% , -20%);
+    margin-bottom: -50px;
+  }
+}
+
+@media (max-width: 1078px) {
+  .cards {
+    transform: scale(0.7) translate(-20% , -20%);
+  }
+}
+
+@media (max-width: 994px) {
+  .cards {
+    transform: none;
     flex-direction: column;
+    width: auto;
+    align-items: center;
+    margin-bottom: 50px;
   }
 }
 
-/* Card Media Queries */
 @media (max-width: 768px) {
-  .card-side {
-    width: 91mm;
-    height: 57.3mm;
-  }
-
-  .card-side::before {
-    width: 220px;
-    height: 220px;
-    left: 45px;
-    top: 10px;
-  }
-
-  .card-header {
-    padding: 20px 20px 0 20px;
-    font-size: 13px;
-    margin-bottom: 12px;
-  }
-
-  .card-main {
-    padding: 0 20px;
-  }
-
-  .card-info {
-    margin-top: 10px;
-  }
-
-  .card-info span {
-    font-size: 8px;
-  }
-
-  .card-info h4 {
-    font-size: 12px;
-    margin-bottom: 6px;
-  }
-
-  .card-img {
-    min-width: 65px;
-    width: 65px;
-    height: 80px;
-  }
-
-  .card-footer {
-    padding: 18px 20px 12px;
-    font-size: 11px;
-  }
-
-  .bedge-icon {
-    width: 30px;
-    height: 30px;
-    margin-right: 6px;
-    margin-bottom: 6px;
-  }
-
-  #qrcode {
-    width: 75px;
+  .cards {
+    transform: scale(0.8) translate(0, -15%);
+    margin-bottom: -100px;
   }
 }
 
-@media (max-width: 375px) {
-  .card-side {
-    width: 89mm;
-    height: 54.3mm;
+@media (max-width: 528px) {
+  .cards {
+    transform: scale(0.6) translate(0, -35%);
+    margin-bottom: -250px;
   }
+}
 
-  .card-side::before {
-    width: 220px;
-    height: 220px;
-    left: 40px;
-    top: 8px;
-  }
-
-  .card-header {
-    padding: 18px 18px 0 18px;
-    font-size: 13px;
-    margin-bottom: 14px;
-  }
-
-  .card-main {
-    padding: 0 18px;
-  }
-
-  .card-info {
-    margin-top: 8px;
-  }
-
-  .card-info span {
-    font-size: 8px;
-  }
-
-  .card-info h4 {
-    font-size: 12px;
-    margin-bottom: 5px;
-  }
-
-  .card-img {
-    min-width: 60px;
-    width: 60px;
-    height: 75px;
-  }
-
-  .card-footer {
-    padding: 18px 18px 10px;
-    font-size: 11px;
-  }
-
-  .bedge-icon {
-    width: 27px;
-    height: 27px;
-    margin-right: 5px;
-    margin-bottom: 5px;
+@media (max-width: 400px) {
+  .cards {
+    transform: scale(0.55) translate(0, -43%);
+    margin-bottom: -350px;
   }
 }
 
 
 /* Card Form Styles */
-.card-form {
-  margin-top: 6rem;
+#cardForm {
+  margin-top: 1rem;
 }
 
-.card-form .btn {
-  width: calc(100% - 20px);
-  margin: auto;
+form .btn {
+  width: calc(100% - 23px);
+  margin: 0.5rem auto;
+  padding: 6px 0;
 }
 
-.card-form > div {
-  margin: 0;
+.choices {
+  height: 39px;
+} 
+
+.choices__inner {
+  background-color: transparent;
+  border-radius: 4px;
+  padding: 5px 0 0 5px;
+  height: 100%;
+  overflow-y: scroll;
+  min-height: auto;
+}
+
+.choices__input {
+  background-color: transparent;
+}
+
+.row > div {
+  padding-top: inherit;
+  padding-bottom: inherit;
 }

@@ -3,61 +3,76 @@ import generateCardTemplateGe from "./cardtoimg-assets/generateFrontCardTemplate
 import generateCardTemplateEn from "./cardtoimg-assets/generateBackCardTemplate.js";
 import nodeHtmlToImage from "node-html-to-image";
 
-import fetch from "node-fetch";
 import * as fs from "fs";
 import convertLetters from "../assets/js/convertLetters.js";
 import generateQR from "../assets/js/generateQR.js";
+import statusChanger from "../assets/js/statusChanger.js";
 
-const hostname = "http://127.0.0.1:3000";
+import dotenv from "dotenv"
+
 
 (async () => {
-  const response = await fetch(`${hostname}/assets/js/users.json`);
-  const usersJSON = await response.json();
-  const users = usersJSON.data;
+  dotenv.config()
 
-  const statusResponse = await fetch(`${hostname}/assets/js/statuses.json`);
-  const statuses = await statusResponse.json();
+  const sortedUsers = getSortedUsers();
 
-  for (let i = 0; i < users.length; i++) {
-    const frontPath = `./generate/card-imgs/${users[i].card_number}-front.jpg`;
-    const backPath = `./generate/card-imgs/${users[i].card_number}-back.jpg`;
-    const QRValue = await generateQR(`amnistia.ge/user/${users[i].card_number}`);
+  for(const userData of sortedUsers){
+
+    const currentCardNum = userData.card_number;
+    const currentUserID = userData.user_id;
+
+    const frontPath = `./generate/card-imgs/${currentCardNum}-front.jpg`;
+    const backPath = `./generate/card-imgs/${currentCardNum}-back.jpg`;
+    const QRValue = await generateQR(`https://amnistia.ge/user/${currentUserID}`);
 
     if (!fs.existsSync(frontPath)) {
       await nodeHtmlToImage({
-        output: `./generate/card-imgs/${users[i].card_number}-front.jpg`,
+        output: `./generate/card-imgs/${currentCardNum}-front.jpg`,
         html: generateCardTemplateGe(),
         content: {
-          name: users[i].name,
-          surname: users[i].surname,
-          card_number: users[i].card_number,
-          id_number: users[i].id_number,
-          birth_date: users[i].birth_date,
-          img: users[i].img,
-          validation: users[i].validation,
-          status: users[i].status,
-          class: statuses[users[i].status.replace(" ", "_")].replace(" ", ""),
+          name: userData.name,
+          img: userData.img,
+          registration: userData.registration,
+          card_number: userData.card_number,
+          id_number: userData.id_number,
+          birth_date: userData.birth_date,
+          
+          status: statusChanger(userData.status, 'clean'),
+          class: statusChanger(userData.status, 'class'),
         },
-      }).then(() => console.log(`${users[i].card_number} frontcard created successfully!'`));
+      }).then(() => console.log(`${currentCardNum} frontcard created successfully!'`));
     }
     if (!fs.existsSync(backPath)) {
       await nodeHtmlToImage({
-        output: `./generate/card-imgs/${users[i].card_number}-back.jpg`,
+        output: `./generate/card-imgs/${currentCardNum}-back.jpg`,
         html: generateCardTemplateEn(),
         content: {
-          card_number: users[i].card_number,
-          id_number: users[i].id_number,
-          birth_date: users[i].birth_date,
-          validation: users[i].validation,
-          class: statuses[users[i].status.replace(" ", "_")].replace(" ", ""),
+          card_number: userData.card_number,
+          id_number: userData.id_number,
+          birth_date: userData.birth_date,
+          registration: userData.registration,
 
-          nameEN: convertLetters(users[i].name),
-          surnameEN: convertLetters(users[i].surname),
-          statusEN: statuses[users[i].status.replace(" ", "_")],
-          QRValue: QRValue,
+          name: convertLetters(userData.name),
+          status: statusChanger(userData.status, 'lang'),
+          class: statusChanger(userData.status, 'class'),
+          QRValue,
         },
-      }).then(() => console.log(`${users[i].card_number} backcard created successfully!'`));
+      }).then(() => console.log(`${currentCardNum} backcard created successfully!'`));
     }
+    console.log(`User Number ${currentCardNum} Done...`); 
   }
-  console.log("Works...");
 })();
+
+function getSortedUsers() {
+  let allUser = []
+  const usersJSONList = fs.readdirSync("./database")
+
+  for(const userJSONName of usersJSONList){
+    const userJSON = JSON.parse(fs.readFileSync(`./database/${userJSONName}`, 'utf8'));
+    userJSON.status = statusChanger(userJSON.status, 'clean')
+    allUser.push(userJSON)
+  }
+
+  allUser.sort((a, b) => a.card_number - b.card_number)
+  return allUser
+}

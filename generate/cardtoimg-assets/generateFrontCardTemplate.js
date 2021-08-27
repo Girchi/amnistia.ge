@@ -1,4 +1,5 @@
-const hostname = "http://127.0.0.1:3000";
+import dotenv from "dotenv"
+dotenv.config()
 
 const generateCardTemplateGe = function () {
   return `
@@ -40,7 +41,7 @@ const generateCardTemplateGe = function () {
       content: "";
       width: 450px;
       height: 400px;
-      background: url("${hostname}/assets/img/card/amnistia.png") no-repeat center/contain;
+      background: url("${process.env.HOSTNAME}/assets/img/card/amnistia.png") no-repeat center/contain;
       position: absolute;
       left: 50px;
       top: 50px;
@@ -154,7 +155,6 @@ const generateCardTemplateGe = function () {
   </style>
 
   <body>
-    <div id="cards" class="cards card-{{class}}">
     <div id="card-front" class="card-side">
     <div class="left-style">
         <svg xmlns="http://www.w3.org/2000/svg" width="145.519" height="200.274" viewBox="0 0 145.519 200.274">
@@ -165,7 +165,7 @@ const generateCardTemplateGe = function () {
     <main class="card-main">
         <div class="card-info">
         <span>სახელი გვარი</span>
-        <h4>{{name}} {{surname}}</h4>
+        <h4>{{name}}</h4>
         <span>დაბადების თარიღი</span>
         <h4>{{birth_date}}</h4>
         </div>
@@ -176,21 +176,20 @@ const generateCardTemplateGe = function () {
         <h4>{{card_number}}</h4>
         </div>
         <div id="card-img" class="card-img">
-            <img class="img-fluid" src="${hostname}{{img}}" alt="user">
+            <img class="img-fluid" src="${process.env.HOSTNAME}{{img}}" alt="user">
         </div>
     </main>
     <footer class="card-footer">
         <div class="bedge">
             <div class="bedge-icon">
-                <img class="img-fluid" src="${hostname}/assets/img/card/{{class}}.png" alt="bedge">
+                <img class="img-fluid" src="${process.env.HOSTNAME}/assets/img/card/{{class}}.png" alt="bedge">
             </div>
             {{status}}
         </div>
         <div>
-            ძალაშია: <span>{{validation}}</span>
+            რეგისტრირდა: <span>{{registration}}</span>
         </div>
     </footer>
-    </div>
     </div>
   </body>
 </html>`;

@@ -1,30 +1,9 @@
-doctype html
-head
-  meta(charset='utf-8')
-  meta(content='width=device-width, initial-scale=1.0' name='viewport')
-  title დიდი ამნისტია
-  meta(content='' name='description')
-  meta(content='' name='keywords')
-  // Favicons
-  link(href='/assets/img/amnistia.png' rel='icon')
-  link(href='/assets/img/apple-touch-icon.png' rel='apple-touch-icon')
-  // Google Fonts
-  link(href='https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i' rel='stylesheet')
-  link(rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.1/css/all.css' integrity='sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf' crossorigin='anonymous')
-  // Vendor CSS Files
-  link(href='/assets/vendor/aos/aos.css' rel='stylesheet')
-  link(href='/assets/vendor/aos/aos.css' rel='stylesheet')
-  link(rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.1/css/all.css' integrity='sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf' crossorigin='anonymous')
+// ======= Head =======
+include parts/head.pug
+// End Head
 
-  link(href='/assets/vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet')
-  link(href='/assets/vendor/bootstrap-icons/bootstrap-icons.css' rel='stylesheet')
-  link(href='/assets/vendor/glightbox/css/glightbox.min.css' rel='stylesheet')
-  link(href='/assets/vendor/remixicon/remixicon.css' rel='stylesheet')
-  link(href='/assets/vendor/swiper/swiper-bundle.min.css' rel='stylesheet')
-  // Template Main CSS File
-  link(href='/assets/css/style.css' rel='stylesheet')
-  link(href='/assets/css/user.css' rel='stylesheet')
-  link(href='/assets/css/download.css' rel='stylesheet')
+// Template Main CSS File
+link(href='/assets/css/style.css' rel='stylesheet')
 
 body
   // ======= Header =======
@@ -32,36 +11,22 @@ body
   // End Header
 
   // ======= main =======
-  main.leaderboard__profiles.container.addList
+  main.container.documents
     each PDF in PDFDirectory  
-      a#pdfId(href=`../generate/pdf/${PDF}` download target='_blank')
-        article.leaderboard__profile
-          span.leaderboard__value
+      a(href=`/generate/pdf/${PDF}` download target='_blank')
+        article.document-canvas
+          span.document-value
             span= PDF
             span
               i.fas.fa-cloud-download-alt
-
-
-
 
   // ======= Footer =======
   include parts/footer.pug
   // End Footer
 
-  #preloader
-  a.back-to-top.d-flex.align-items-center.justify-content-center(href='#')
-    i.bi.bi-arrow-up-short
-// Vendor JS Files
-script(src='/assets/vendor/aos/aos.js')
-script(src='/assets/vendor/bootstrap/js/bootstrap.bundle.min.js')
-script(src='/assets/vendor/glightbox/js/glightbox.min.js')
-script(src='/assets/vendor/isotope-layout/isotope.pkgd.min.js')
-script(src='/assets/vendor/php-email-form/validate.js')
-script(src='/assets/vendor/purecounter/purecounter.js')
-script(src='/assets/vendor/swiper/swiper-bundle.min.js')
+// ======= Scripts =======
+include parts/scripts.pug
+// End Scripts
+
 // Template Main JS File
 script(src='/assets/js/main.js')
-// For img to pdf
-script(src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous')
-script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous')
-script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js' integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6' crossorigin='anonymous')

@@ -1,27 +1,16 @@
-doctype html
-head
-  meta(charset='utf-8')
-  meta(content='width=device-width, initial-scale=1.0' name='viewport')
-  title დიდი ამნისტია
-  meta(content='' name='description')
-  meta(content='' name='keywords')
-  // Favicons
-  link(href='assets/img/amnistia.png' rel='icon')
-  link(href='assets/img/apple-touch-icon.png' rel='apple-touch-icon')
-  // Google Fonts
-  link(href='https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i' rel='stylesheet')
-  link(rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.1/css/all.css' integrity='sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf' crossorigin='anonymous')
-  // Vendor CSS Files
-  link(href='assets/vendor/aos/aos.css' rel='stylesheet')
-  link(href='assets/vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet')
-  link(href='assets/vendor/bootstrap-icons/bootstrap-icons.css' rel='stylesheet')
-  link(href='assets/vendor/boxicons/css/boxicons.min.css' rel='stylesheet')
-  link(href='assets/vendor/glightbox/css/glightbox.min.css' rel='stylesheet')
-  link(href='assets/vendor/remixicon/remixicon.css' rel='stylesheet')
-  link(href='assets/vendor/swiper/swiper-bundle.min.css' rel='stylesheet')
+// ======= Head =======
+include parts/head.pug
+// End Head
 
-  // Template Main CSS File
-  link(href='assets/css/style.css' rel='stylesheet')
+// Template CSS Files
+link(href='assets/css/style.css' rel='stylesheet')
+
+script.
+  let x = !{JSON.stringify(tokenExpired)}
+  if(x === 'expired'){
+    window.localStorage.clear()
+    window.location = '/';
+  }
 
 // ======= Header =======
 include parts/header.pug
@@ -118,32 +107,21 @@ main#main
       .testimonials-slider.swiper-container(data-aos='fade-up' data-aos-delay='100')
         #latestUsers.swiper-wrapper
           ul#usersList.list-group
-          - for(let i = arr.length - 1; i > arr.length - 6; i--)
-              .swiper-slide
-                .testimonial-item
-                  a(href=`user/${arr[i].card_number}`)
-                    img.testimonial-img(src=`${arr[i].img}` alt='user image')
-                    h3= `${arr[i].name} ${arr[i].surname}`
-                    h4= arr[i].status
-        a.users-btn(href='users') &#x10E1;&#x10E0;&#x10E3;&#x10DA;&#x10D8; &#x10E1;&#x10D8;&#x10D0;
-        //- h3.usersCount (12335790)
-  // Modal - Full User List
-  #usersModal.modal.fade(data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='usersModalLabel' aria-hidden='true')
-    .modal-dialog
-      .modal-content
-        .modal-header
-          h5#usersModalLabel.modal-title &#x10E1;&#x10D8;&#x10D0;
-          button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
-          .modal-body
-            .modal-footer
-              button.btn.btn-success(type='button' data-bs-dismiss='modal')
-            | &#x10D3;&#x10D0;&#x10EE;&#x10E3;&#x10E0;&#x10D5;&#x10D0;
+          each user in usersList
+            .swiper-slide
+              .testimonial-item
+                a(href=`user/${user.user_id}`)
+                  img.testimonial-img(src=`${user.img}` alt='user image')
+                  h3= user.name
+                  h4= user.status
+        a.users-btn(href='users') სრული სია
+
   // End Testimonials Section
   // ======= Services Section =======
   section#services.services.section-bg
     .container(data-aos='fade-up')
       .section-title
-        h2 &#x10DE;&#x10E0;&#x10D8;&#x10DC;&#x10EA;&#x10D8;&#x10DE;&#x10D4;&#x10D1;&#x10D8;
+        h2 პრინციპები
       .row
         .col-lg-4.col-md-6.d-flex.align-items-stretch(data-aos='zoom-in' data-aos-delay='100')
           .icon-box.iconbox-blue
@@ -181,14 +159,6 @@ main#main
             p საზოგადოება დაფუძნებულად ჩაითვლება 2021 წლის 12 აგვისტოს 4:20 საათიდან.
   // End Sevices Section
 
-  //- // ======= Portfolio Section =======
-  //- section#portfolio.portfolio
-  //-   .container(data-aos='fade-up')
-  //-     .section-title
-  //-       h2 ამნისტიის შესახებ
-  //-       p ჰუმანიზმის პრინციპიდან გამომდინარე, ერთჯერადი, დროებითი და განსაკუთრებული ღონისძიების სახით, საზოგადოებრივი საშიშროების ხარისხის გათვალისწინებით, ამ კანონის საფუძველზე, სისხლისსამართლებრივი პასუხისმგებლობისა და სასჯელისაგან თავისუფლდებიან საქართველოს სისხლის სამართლის კოდექსით (საქართველოს საკანონმდებლო მაცნე, №41(48), 1999 წელი, მუხ. 209) გათვალისწინებული ზოგიერთი დანაშაულის ჩადენისათვის ბრალდებული და მსჯავრდებული პირები, ასევე დანიშნული სასჯელი უმცირდებათ ან უფრო მსუბუქი სასჯელით ეცვლებათ ცალკეული დანაშაულების ჩადენისათვის მსჯავრდებულ პირებს.
-  //- // End Portfolio Section
-
   // ======= Team Section =======
   section#team.team.section-bg
     .container(data-aos='fade-up')
@@ -210,8 +180,8 @@ main#main
                 a(href='')
                   i.bi.bi-linkedin
             .member-info
-              h4 &#x10D8;&#x10D0;&#x10D2;&#x10DD; &#x10EE;&#x10D5;&#x10D8;&#x10E9;&#x10D8;&#x10D0;
-              span &#x10D3;&#x10D0;&#x10DB;&#x10E4;&#x10E3;&#x10EB;&#x10DC;&#x10D4;&#x10D1;&#x10D4;&#x10DA;&#x10D8;
+              h4 იაგო ხვიჩია
+              span დამფუძნებელი
         .col-lg-4.col-md-6.d-flex.justify-content-center.align-items-stretch(data-aos='fade-up' data-aos-delay='200')
           .member
             .member-img
@@ -226,8 +196,8 @@ main#main
                 a(href='')
                   i.bi.bi-linkedin
             .member-info
-              h4 &#x10D5;&#x10D0;&#x10EE;&#x10DD; &#x10DB;&#x10D4;&#x10D2;&#x10E0;&#x10D4;&#x10DA;&#x10D8;&#x10E8;&#x10D5;&#x10D8;&#x10DA;&#x10D8;
-              span &#x10E1;&#x10D0;&#x10D1;&#x10ED;&#x10DD;&#x10E1; &#x10EC;&#x10D4;&#x10D5;&#x10E0;&#x10D8;
+              h4 ვახო მეგრელიშვილი
+              span საბჭოს წევრი
         .col-lg-4.col-md-6.d-flex.justify-content-center.align-items-stretch(data-aos='fade-up' data-aos-delay='300')
           .member
             .member-img
@@ -242,8 +212,8 @@ main#main
                 a(href='')
                   i.bi.bi-linkedin
             .member-info
-              h4 &#x10E1;&#x10D0;&#x10DC;&#x10D3;&#x10E0;&#x10DD; &#x10E0;&#x10D0;&#x10E5;&#x10D5;&#x10D8;&#x10D0;&#x10E8;&#x10D5;&#x10D8;&#x10DA;&#x10D8;
-              span &#x10E1;&#x10D0;&#x10D1;&#x10ED;&#x10DD;&#x10E1; &#x10EC;&#x10D4;&#x10D5;&#x10E0;&#x10D8;
+              h4 სანდრო რაქვიაშვილი
+              span საბჭოს წევრი
   // End Team Section
 
   // ======= Frequently Asked Questions Section =======
@@ -302,20 +272,14 @@ main#main
   // End Frequently Asked Questions Section
 // End #main
 
+
 // ======= Footer =======
 include parts/footer.pug
 // End Footer
 
-#preloader
-a.back-to-top.d-flex.align-items-center.justify-content-center(href='#')
-  i.bi.bi-arrow-up-short
-// Vendor JS Files
-script(src='assets/vendor/aos/aos.js')
-script(src='assets/vendor/bootstrap/js/bootstrap.bundle.min.js')
-script(src='assets/vendor/glightbox/js/glightbox.min.js')
-script(src='assets/vendor/isotope-layout/isotope.pkgd.min.js')
-script(src='assets/vendor/php-email-form/validate.js')
-script(src='assets/vendor/purecounter/purecounter.js')
-script(src='assets/vendor/swiper/swiper-bundle.min.js')
+// ======= Scripts =======
+include parts/scripts.pug
+// End Scripts
+
 // Template Main JS File
 script(src='assets/js/main.js')

@@ -1,141 +1,128 @@
-doctype html
-head
-  meta(charset='utf-8')
-  meta(content='width=device-width, initial-scale=1.0' name='viewport')
-  title დიდი ამნისტია
-  meta(content='' name='description')
-  meta(content='' name='keywords')
-  // Favicons
-  link(href='../assets/img/amnistia.png' rel='icon')
-  link(href='../assets/img/apple-touch-icon.png' rel='apple-touch-icon')
-  // Google Fonts
-  link(href='https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i' rel='stylesheet')
-  link(rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.1/css/all.css' integrity='sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf' crossorigin='anonymous')
-  // Vendor CSS Files
-  link(href='/assets/vendor/aos/aos.css' rel='stylesheet')
-  link(href='/assets/vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet')
-  link(href='/assets/vendor/bootstrap-icons/bootstrap-icons.css' rel='stylesheet')
-  link(href='/assets/vendor/boxicons/css/boxicons.min.css' rel='stylesheet')
-  link(href='/assets/vendor/glightbox/css/glightbox.min.css' rel='stylesheet')
-  link(href='/assets/vendor/remixicon/remixicon.css' rel='stylesheet')
-  link(href='/assets/vendor/swiper/swiper-bundle.min.css' rel='stylesheet')
-  // Template Main CSS File
-  link(href='/assets/css/style.css' rel='stylesheet')
-  link(href='/assets/css/user.css' rel='stylesheet')
+// ======= Head =======
+include parts/head.pug
+// End Head
 
-  // ======= Header =======
-  include parts/header.pug
-  // End Header
+link(rel='stylesheet' href='https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css')
 
-  // ======= Main =======
+// Template Main CSS File
+link(href='/assets/css/style.css' rel='stylesheet')
+link(href='/assets/css/user.css' rel='stylesheet')
+
+// ======= Header =======
+include parts/header.pug
+// End Header
+
+// ======= Main =======
 .container
-  form#card-form.card-form.row(action='http://127.0.0.1:3000/custom-card' method='POST' enctype="multipart/form-data")
+  form#cardForm.row(action='/custom-card' method='POST' enctype="multipart/form-data")
+    
+    .mb-3.col-12.col-sm-6.col-lg-4(style="display:none")
+      label.form-label Token
+      input.form-control(type='text' id="hiddenToken" name="token" )
+    
     .mb-3.col-12.col-sm-6.col-lg-4
       label.form-label სახელი და გვარი
-      input.form-control(type='text' id="nameInput" name="name" )
+      input.form-control(type='text' id="nameInput" name="name" required)
+    
     .mb-3.col-12.col-sm-6.col-lg-4
       label.form-label პირადი ნომერი
-      input.form-control(type='text' id="idNumInput" name="id_number" maxlength='11' )
+      input.form-control(type='text' id="idNumInput" name="id_number" maxlength='11' required)
+    
     .mb-3.col-12.col-sm-6.col-lg-4
       label.form-label დაბადების თარიღი
-      input.form-control(type='date' id="dateInput" name="birth_date" maxlength='5' )
+      input.form-control(type='date' id="dateInput" name="birth_date" maxlength='5' required)
+    
     .mb-3.col-12.col-sm-6.col-lg-4
       label.form-label სტატუსის არჩევა
-      select.form-select(name='status' id="statusInput")
+      select.form-select(name='status' id="statusInput" required)
         option(value='პატიმარი') პატიმარი
         option(value='ადვოკატი') ადვოკატი
         option(value='ქომაგი') ქომაგი
         option(value='დამფუძნებელი') დამფუძნებელი
-        option(value='ინვესტორი') ინვესტორი
-        option(value='ოქროს_ინვესტორი') ოქროს ინვესტორი
+        option(value='ინვესტორი' disabled) ინვესტორი
+        option(value='ოქროს_ინვესტორი' disabled) ოქროს ინვესტორი
+    
     .mb-3.col-12.col-sm-6.col-lg-4
-      label.form-label ბარათის ნომერი
-      input.form-control(type='text' id="cardNumInput" name="card_number" )
-    .mb-3.col-12.col-sm-6.col-lg-4
-      label.form-label ამოწურვის ვადა
-      input.form-control(type='date' name="validation" id="validInput" )
+      label.form-label დამატებითი სტატუსების არჩევა
+      select.form-select(name='other_statuses' id="multipleStatusInput" multiple )
+        option(value='პატიმარი') პატიმარი
+        option(value='ადვოკატი') ადვოკატი
+        option(value='ქომაგი') ქომაგი
+        option(value='დამფუძნებელი') დამფუძნებელი
+        option(value='ინვესტორი' disabled) ინვესტორი
+        option(value='ოქროს_ინვესტორი' disabled) ოქროს ინვესტორი
+
     .mb-3.col-12.col-sm-6.col-lg-4
       label.form-label.w-100 ფოტოს ატვირთვა
-      input.form-control-file(type='file' for='image' id="imageInput" name="image" value='Choose Image' )
+      input.form-control-file(type='file' for='image' id="imageInput" name="image" value='Choose Image' required)
 
     button.btn.btn-success(type='submit') გენერირება
 
+  //- Live cards customize view
+  .cards
+    .card-side
+      svg(xmlns='http://www.w3.org/2000/svg' width='145.519' height='200.274' viewbox='0 0 145.519 200.274')
+        path#Path_2(data-name='Path 2' d='M476.99,0c-1.171,0-64.788,37.464-7.415,93.134s21.856,107.139,21.856,107.139H356.781V0Z' transform='translate(-356.781)' fill='#fcdbdb')
 
-
-#userinfo-container.container.pb-4  
-  #cards.cards(class=`card-prisoner`)
-    #card-front.card-side
-      div.left-style
-        svg(xmlns='http://www.w3.org/2000/svg' width='145.519' height='200.274' viewbox='0 0 145.519 200.274')
-          path#Path_2(data-name='Path 2' d='M476.99,0c-1.171,0-64.788,37.464-7.415,93.134s21.856,107.139,21.856,107.139H356.781V0Z' transform='translate(-356.781)' fill='#fcdbdb')
-
-      header.card-header='ამნისტიის მხარდამჭერთა საზოგადოება'
-      main.card-main
-        .card-info
-          span &#x10E1;&#x10D0;&#x10EE;&#x10D4;&#x10DA;&#x10D8; &#x10D2;&#x10D5;&#x10D0;&#x10E0;&#x10D8;
-          h4#cardFullName სახელი გვარი
-          span &#x10D3;&#x10D0;&#x10D1;&#x10D0;&#x10D3;&#x10D4;&#x10D1;&#x10D8;&#x10E1; &#x10D7;&#x10D0;&#x10E0;&#x10D8;&#x10E6;&#x10D8;
-          h4#cardDate 08/04/2000
-        .card-info
-          span &#x10DE;&#x10D8;&#x10E0;&#x10D0;&#x10D3;&#x10D8; &#x10DC;&#x10DD;&#x10DB;&#x10D4;&#x10E0;&#x10D8;
-          h4#cardIdNum 0100101010
-          span &#x10DC;&#x10DD;&#x10DB;&#x10D4;&#x10E0;&#x10D8;
-          h4#cardNum 1000
-        #card-img.card-img
-          img#cardImage.img-fluid(src='/assets/img/amnistia.png' alt='user')
-      footer.card-footer
-        .bedge
-          .bedge-icon
-            img#cardBadge.img-fluid(src=`/assets/img/card/prisoner.png` alt='badge')
-          div#cardStatus პატიმარი
+      header='ამნისტიის მხარდამჭერთა საზოგადოება'
+      main
+        .card-col
+          span სახელი გვარი
+          h4#userName სახელი გვარი
+          span დაბადების თარიღი
+          h4#userDate 1990-05-08
+        .card-col
+          span პირადი ნომერი
+          h4#userIdNum 01001000100
+          span ნომერი
+          h4#userCardNum= newCardNum
+        .card-col
+          img#cardImg.card-img(src='/assets/img/girchi.png' alt='user')
+      footer
+        .card-status
+          img#userBadge(src=`/assets/img/card/prisoner.png` alt='badge')
+          div#userStatus პატიმარი
         div
-          | &#x10EB;&#x10D0;&#x10DA;&#x10D0;&#x10E8;&#x10D8;&#x10D0;: 
-          span#cardValid 01/09/2030
-    #card-back.card-side
-      div.left-style
-        svg(xmlns='http://www.w3.org/2000/svg' width='145.519' height='200.274' viewbox='0 0 145.519 200.274')
-          path#Path_2(data-name='Path 2' d='M476.99,0c-1.171,0-64.788,37.464-7.415,93.134s21.856,107.139,21.856,107.139H356.781V0Z' transform='translate(-356.781)' fill='#fcdbdb')
+          | რეგისტრირდა: 
+          span#cardRegister= currentDate
 
-      header.card-header AMNESTY SUPPORTERS SOCIETY
-      main.card-main
-        .card-info
+    .card-side
+      svg(xmlns='http://www.w3.org/2000/svg' width='145.519' height='200.274' viewbox='0 0 145.519 200.274')
+        path#Path_2(data-name='Path 2' d='M476.99,0c-1.171,0-64.788,37.464-7.415,93.134s21.856,107.139,21.856,107.139H356.781V0Z' transform='translate(-356.781)' fill='#fcdbdb')
+
+      header AMNESTY SUPPORTERS SOCIETY
+      main
+        .card-col
           span Name Surname
-          h4#cardFullName name surname
+          h4#userName Name Surname
           span Birth Date
-          h4#cardDate 08/04/2000
-        .card-info
+          h4#userDate 1990-05-08
+        .card-col
           span Personal Number
-          h4#cardIdNum 0100101010
+          h4#userIdNum 01001000100
           span Number
-          h4#cardNum 1000
-        #card-img.card-img
-          .card-qrcode
-            img(src="/assets/img/amnistiaqr.png")
-      footer.card-footer
-        .bedge
-          .bedge-icon
-            img#cardBadge.img-fluid(src=`/assets/img/card/prisoner.png` alt='badge')
-          div#cardStatus prisoner
+          h4#userCardNum= newCardNum
+        .card-col
+          img(src= 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0CAYAAABUmhYnAAAAAklEQVR4AewaftIAAARkSURBVO3BQaocOBTAQMn8+19Zs31k4WC6JwnGVQLxB1UyqDFUMqixUcmGGkMlgxoblWyoMVQyqPEHLZ6rLJ6rLJ6r/PCLSr5IjQNqDJVsqLFRyUYlG2oMlXygki9SY1g8V1k8V1k8V/nhN9Q4UMmBSgY1BjWGSjYq2VDjiyr5gBoHKtlYPFdZPFdZPFf54S9TY6hkQ42hkkGNjUoOqDGoMVTyD1k8V1k8V1k8V/nhH6fGF6kxVDKosVHJP2zxXGXxXGXxXOWH36jkL6pkUGNQY6OSQY1BjQNqDJV8oJIvWjxXWTxXWTxX+eEXavxD1BgqGdQYKhnUGCoZ1BgqGdQYKhnUGCrZUON/tHiusniusniuYsW/TI0PVDKoMVTyATWGSv6ixXOVxXOVxXOVHw6pMVSyocZQyf+okkGNDTU2KhnUGCo5oMaBSgY1NhbPVRbPVRbPVX7UOFDJhhpDJYMaG5UcqGRQY6hkQ40PqHGgkg9UMqgxLJ6rLJ6rLJ6rCMRQyQE1DlQyqHGgkkGNjUr+R2oMlQxqbFQyqHGgkmHxXGXxXGXxXEUgNioZ1BgqGdQYKtlQY6hkUGOjkg01hko21NioZEONA5VsqLFRybB4rrJ4rrJ4riIQByo5oMZQyYYaByrZUOMDlQxqbFQyqLFRyRctnqssnqssnqv8VLKhxoYaG5UMahyoZEONjUoGNYZKvkiNoZJBjQ01hkoOLJ6rLJ6rLJ6rCMRQyYYaX1TJhhpDJYMaQyWDGgcqOaDGgUo+oMbG4rnK4rnK4rmKQByo5IvU+EAlG2oMlQxqDJUMamxUckCNoZIPqDEsnqssnqssnqv88ItKNtQYKtlQY6OSA2r8QZUManygki+qZFg8V1k8V1k8V/mpZFBjqOSAGkMlX1TJhhpDJYMaB9TYUGOjkkGNoZJBjaGSQY2NxXOVxXOVxXMVgRgqGdQYKjmgxlDJATU2KtlQY6hkUGOoZFBjqGRDjaGSA2p8YPFcZfFcZfFcxYodNTYqOaDGgUoOqDFU8gE1hkq+SI2NSg4snqssnqssnqsIxFDJF6kxVDKocaCSDTU2KhnUGCoZ1BgqGdT4okoGNYZKBjWGxXOVxXOVxXMVK/4mNYZKBjUOVPI/UmOjkgNqDJUcUGNYPFdZPFdZPFcRiD+okg01NirZUGOo5ANqDJUMagyVDGoMlQxqfKCSYfFcZfFcZfFc5YdfVPJFahyo5AOVDGoMlQxqDJUMlXygkgOVDGoMlWwsnqssnqssnqv88BtqHKjki9QYKtlQY6hko5IvUuMDagyVHFg8V1k8V1k8V/nhL1PjiyoZ1BgqGdT4gyoZ1BgqOaDGsHiusniusniu8sNfVsmGGoMaByoZ1NioZEONjUo+oMZQyYHFc5XFc5XFc5UffqOSP0iNoZIDahyoZFBjqGSjkg01NioZ1NhQY6hkWDxXWTxXWTxX+eEXavzD1Bgq2VBjqOSAGkMlH6hkUOOLFs9VFs9VFs9V/gOIzb8DE5+IJAAAAABJRU5ErkJggg==')
+      footer
+        .card-status
+          img#userBadge.img-fluid(src=`/assets/img/card/prisoner.png` alt='badge')
+          div#userStatus Prisoner
         div
-          | VALID: 
-          span#cardValid 01/09/2030
+          | Registered: 
+          span#cardRegister= currentDate
 
- 
 // ======= Footer =======
 include parts/footer.pug
 // End Footer
 
-#preloader
-a.back-to-top.d-flex.align-items-center.justify-content-center(href='#')
-  i.bi.bi-arrow-up-short
-// Vendor JS Files
-script(src='/assets/vendor/aos/aos.js')
-script(src='/assets/vendor/bootstrap/js/bootstrap.bundle.min.js')
-script(src='/assets/vendor/glightbox/js/glightbox.min.js')
-script(src='/assets/vendor/isotope-layout/isotope.pkgd.min.js')
-script(src='/assets/vendor/php-email-form/validate.js')
-script(src='/assets/vendor/purecounter/purecounter.js')
-script(src='/assets/vendor/swiper/swiper-bundle.min.js')
+// ======= Scripts =======
+include parts/scripts.pug
+// End Scripts
+
+script(src='https://code.jquery.com/jquery-3.6.0.min.js' integrity='sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=' crossorigin='anonymous')
+script(src='https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js')
+
 // Template Main JS File
 script(src='/assets/js/main.js')
 script(type="module" src='/assets/js/customizeCard.js')
