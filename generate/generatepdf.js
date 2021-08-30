@@ -1,12 +1,9 @@
 import { PDFDocument, degrees } from "pdf-lib";
-import fetch from "node-fetch";
 import * as fs from "fs";
-import dotenv from "dotenv"
 
 // --Generate PDFs--
-(async () => {
-  dotenv.config()
-
+async function generatepdf (){
+  
   const existingUsers = getExistingUsersCardNums();
   const PDFShouldBe = parseInt(existingUsers.length / 5)
 
@@ -19,8 +16,8 @@ import dotenv from "dotenv"
       const page = pdfDoc.addPage();
 
       // Add background
-      jpgUrl = `${process.env.HOSTNAME}/generate/bg.jpg`;
-      jpgImageBytes = await fetch(jpgUrl).then((res) => res.arrayBuffer());
+      jpgImageBytes = fs.readFileSync('./generate/bg.jpg');
+
       jpgImage = await pdfDoc.embedJpg(jpgImageBytes);
       jpgDims = jpgImage.scale(0.24);
       page.drawImage(jpgImage, {
@@ -39,9 +36,9 @@ import dotenv from "dotenv"
         const frontPath = `./generate/card-imgs/${unusedCards[i]}-front.jpg`;
         const backPath = `./generate/card-imgs/${unusedCards[i]}-back.jpg`;
         if (fs.existsSync(frontPath) && fs.existsSync(backPath)) {
+
           // Card front side
-          jpgUrl = `${process.env.HOSTNAME}/generate/card-imgs/${unusedCards[i]}-front.jpg`;
-          jpgImageBytes = await fetch(jpgUrl).then((res) => res.arrayBuffer());
+          jpgImageBytes = fs.readFileSync(frontPath);
           jpgImage = await pdfDoc.embedJpg(jpgImageBytes);
           jpgDims = jpgImage.scale(0.405);
           page.drawImage(jpgImage, {
@@ -52,8 +49,7 @@ import dotenv from "dotenv"
           });
 
           // Card back side
-          jpgUrl = `${process.env.HOSTNAME}/generate/card-imgs/${unusedCards[i]}-back.jpg`;
-          jpgImageBytes = await fetch(jpgUrl).then((res) => res.arrayBuffer());
+          jpgImageBytes = fs.readFileSync(backPath);
           jpgImage = await pdfDoc.embedJpg(jpgImageBytes);
           jpgDims = jpgImage.scale(0.405);
           page.drawImage(jpgImage, {
@@ -63,7 +59,7 @@ import dotenv from "dotenv"
             height: jpgDims.height + 1,
           });
 
-          // Y position changes when one image set
+          // Y position changes per image set
           positionY -= 162.5;
 
           pdfName = pdfName + '-' +  unusedCards[i];
@@ -87,7 +83,7 @@ import dotenv from "dotenv"
       console.log("There must be 5 unused clean set of images to fill pdf");
     }
   }
-})();
+};
 
 function getExistingUsersCardNums() {
   const usersDatabase = fs.readdirSync("./database")
@@ -116,6 +112,7 @@ function getUnusedCardNums(existingUsers) {
       freeCards.push(existingUsers[i])
     }
   }
-  console.log(freeCards)
   return freeCards;
 }
+
+export default generatepdf;

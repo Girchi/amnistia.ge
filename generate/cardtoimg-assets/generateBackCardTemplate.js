@@ -1,6 +1,3 @@
-import dotenv from "dotenv"
-dotenv.config()
-
 const generateCardTemplateEn = function () {
   return `
   <html>
@@ -36,11 +33,9 @@ const generateCardTemplateEn = function () {
         border: 1px solid #ccc;
       }
       
-      .card-side::before {
-        content: "";
+      .asset-img {
         width: 450px;
         height: 400px;
-        background: url("${process.env.HOSTNAME}/assets/img/card/amnistia.png") no-repeat center/contain;
         position: absolute;
         left: 50px;
         top: 50px;
@@ -48,6 +43,7 @@ const generateCardTemplateEn = function () {
         transform: rotate(49deg);
         z-index: -10;
       }
+      
       
       .left-style {
         width: 46%;
@@ -61,8 +57,6 @@ const generateCardTemplateEn = function () {
         width: 100%;
         height: 100%;
       }
-      
-      
       
       .card-header {
         background-color: transparent;
@@ -160,6 +154,7 @@ const generateCardTemplateEn = function () {
             <path id="Path_2" data-name="Path 2" d="M476.99,0c-1.171,0-64.788,37.464-7.415,93.134s21.856,107.139,21.856,107.139H356.781V0Z" transform="translate(-356.781)" fill="#fcdbdb"/>
         </svg>
     </div>
+    <img class="asset-img" src="{{assetImg}}" alt="hands">
     <header class="card-header">AMNESTY SUPPORTERS SOCIETY</header>
         <main class="card-main">
         <div class="card-info">
@@ -183,7 +178,7 @@ const generateCardTemplateEn = function () {
         <footer class="card-footer">
         <div class="bedge">
             <div class="bedge-icon">
-                <img class="img-fluid" src="${process.env.HOSTNAME}/assets/img/card/{{class}}.png" alt="bedge">
+                <img class="img-fluid" src="{{badgeIcon}}" alt="bedge">
             </div>
             {{status}}
         </div>

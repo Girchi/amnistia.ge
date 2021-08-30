@@ -2,77 +2,63 @@
 import generateCardTemplateGe from "./cardtoimg-assets/generateFrontCardTemplate.js";
 import generateCardTemplateEn from "./cardtoimg-assets/generateBackCardTemplate.js";
 import nodeHtmlToImage from "node-html-to-image";
-
 import * as fs from "fs";
+
 import convertLetters from "../assets/js/convertLetters.js";
 import generateQR from "../assets/js/generateQR.js";
 import statusChanger from "../assets/js/statusChanger.js";
 
-import dotenv from "dotenv"
+async function cardtoimg (body){
 
+  const cardNum = body.card_number;
+  const QRValue = await generateQR(`https://amnistia.ge/user/${body.user_id}`);
+  const profileImg = convertImage(body.img)
+  const badgeIcon = convertImage(`/assets/img/card/${statusChanger(body.status, 'class')}.png`)
+  const assetImg = convertImage('/assets/img/card/amnistia.png')
 
-(async () => {
-  dotenv.config()
+  await nodeHtmlToImage({
+    output: `./generate/card-imgs/${cardNum}-front.jpg`,
+    html: generateCardTemplateGe(),
+    content: {
+      name: body.name,
+      registration: body.registration,
+      card_number: body.card_number,
+      id_number: body.id_number,
+      birth_date: body.birth_date,
+      status: statusChanger(body.status, 'clean'),
 
-  const sortedUsers = getSortedUsers();
+      profileImg,
+      badgeIcon,
+      assetImg
+    },
+  }).then(() => console.log(`${cardNum} frontcard created successfully!'`));
+    
+  await nodeHtmlToImage({
+    output: `./generate/card-imgs/${cardNum}-back.jpg`,
+    html: generateCardTemplateEn(),
+    content: {
+      card_number: body.card_number,
+      id_number: body.id_number,
+      birth_date: body.birth_date,
+      registration: body.registration,
+      name: convertLetters(body.name),
+      status: statusChanger(body.status, 'lang'),
 
-  for(const userData of sortedUsers){
+      badgeIcon,
+      assetImg,
+      QRValue,
+    },
+  }).then(() => console.log(`${cardNum} backcard created successfully!'`));
 
-    const currentCardNum = userData.card_number;
-    const currentUserID = userData.user_id;
+  console.log(`User Number ${cardNum} Done...`); 
+};
 
-    const frontPath = `./generate/card-imgs/${currentCardNum}-front.jpg`;
-    const backPath = `./generate/card-imgs/${currentCardNum}-back.jpg`;
-    const QRValue = await generateQR(`https://amnistia.ge/user/${currentUserID}`);
-
-    if (!fs.existsSync(frontPath)) {
-      await nodeHtmlToImage({
-        output: `./generate/card-imgs/${currentCardNum}-front.jpg`,
-        html: generateCardTemplateGe(),
-        content: {
-          name: userData.name,
-          img: userData.img,
-          registration: userData.registration,
-          card_number: userData.card_number,
-          id_number: userData.id_number,
-          birth_date: userData.birth_date,
-          
-          status: statusChanger(userData.status, 'clean'),
-          class: statusChanger(userData.status, 'class'),
-        },
-      }).then(() => console.log(`${currentCardNum} frontcard created successfully!'`));
-    }
-    if (!fs.existsSync(backPath)) {
-      await nodeHtmlToImage({
-        output: `./generate/card-imgs/${currentCardNum}-back.jpg`,
-        html: generateCardTemplateEn(),
-        content: {
-          card_number: userData.card_number,
-          id_number: userData.id_number,
-          birth_date: userData.birth_date,
-          registration: userData.registration,
-
-          name: convertLetters(userData.name),
-          status: statusChanger(userData.status, 'lang'),
-          class: statusChanger(userData.status, 'class'),
-          QRValue,
-        },
-      }).then(() => console.log(`${currentCardNum} backcard created successfully!'`));
-    }
-    console.log(`User Number ${currentCardNum} Done...`); 
-  }
-})();
-
-function getSortedUsers() {
-  let allUser = []
-  const usersJSONList = fs.readdirSync("./database")
-
-  for(const userJSONName of usersJSONList){
-    const userJSON = JSON.parse(fs.readFileSync(`./database/${userJSONName}`, 'utf8'));
-    userJSON.status = statusChanger(userJSON.status, 'clean')
-    allUser.push(userJSON)
-  }
-
-  allUser.sort((a, b) => a.card_number - b.card_number)
-  return allUser
+function convertImage(img) {
+  const cleanUrl = img.replace('/', './')
+  const image = fs.readFileSync(cleanUrl);
+  const base64Image = new Buffer.from(image).toString('base64');
+  const dataURI = 'data:image/jpeg;base64,' + base64Image
+  return dataURI
 }
+
+export default cardtoimg;

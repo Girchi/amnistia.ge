@@ -12,6 +12,8 @@ dotenv.config();
 
 import convertLetters from "./assets/js/convertLetters.js";
 import statusChanger from "./assets/js/statusChanger.js";
+import cardtoimg from "./generate/cardtoimg.js";
+import generatepdf from "./generate/generatepdf.js";
 
 const app = express();
 
@@ -39,7 +41,8 @@ const options = {
   cert: fs.readFileSync('https-conf/cert.pem')
 };
 
-https.createServer(options, app).listen(process.env.PORT);
+https.createServer(options, app).listen(8000);
+console.log(`https://localhost:8000`)
 // app.listen(3000)
 
 // Home Page
@@ -110,7 +113,7 @@ app.post( "/custom-card", [urlencodedParser, upload.single("image")], (req, res)
   const reqBody = req.body;
   const token = reqBody.token;
 
-  fetch(`${process.env.HOSTNAME_GIRCHI}/jsonapi`, { cache: 'no-cache', headers: { 'Authorization': token } })
+  fetch(`${process.env.GIRCHI_DOMAIN}/jsonapi`, { cache: 'no-cache', headers: { 'Authorization': token } })
   .then(response => {
     if (response.status === 200) {
       return response.json();
@@ -143,7 +146,10 @@ app.post( "/custom-card", [urlencodedParser, upload.single("image")], (req, res)
       if(!userExists && userAllowed){
         
         fs.writeFileSync(`./database/${userID}.json`, stringedData, err => { if(err) console.log(err) })
+
         res.redirect(`/user/${userID}`);
+
+        cardtoimg(reqBody)
 
       } else if(userExists && userAllowed){
 
@@ -152,7 +158,10 @@ app.post( "/custom-card", [urlencodedParser, upload.single("image")], (req, res)
         const stringedData = JSON.stringify(reqBody)
 
         fs.writeFileSync(`./database/${userID}.json`, stringedData, err => { if(err) console.log(err) })
+
         res.redirect(`/user/${userID}`);
+
+        cardtoimg(reqBody)
         
       } else {
         res.redirect(`/`);
@@ -180,7 +189,7 @@ app.post("/authorization/:accessToken&:expirationTime&:userID", (req, res) => {
   formData.append("facebook_token_expires_in", req.params.expirationTime);
 
 
-  fetch(`${process.env.HOSTNAME_GIRCHI}/oauth/token`, { method: 'POST', body: formData })
+  fetch(`${process.env.GIRCHI_DOMAIN}/oauth/token`, { method: 'POST', body: formData })
   .then((response) => {
     if (response.status === 200) {
     return response.json();
@@ -194,7 +203,7 @@ app.post("/authorization/:accessToken&:expirationTime&:userID", (req, res) => {
 
 
     // Get User Information
-    fetch(`${process.env.HOSTNAME_GIRCHI}/jsonapi`, { cache: 'no-cache', headers: { 'Authorization': token } })
+    fetch(`${process.env.GIRCHI_DOMAIN}/jsonapi`, { cache: 'no-cache', headers: { 'Authorization': token } })
     .then(response => {
         if (response.status === 200) {
             return response.json();
@@ -220,7 +229,7 @@ app.post("/authorization/:accessToken&:expirationTime&:userID", (req, res) => {
         .then(response => response.json())
         .then(userImgData => {
           let userImgPath = userImgData.data ?
-            `${process.env.HOSTNAME_GIRCHI}${userImgData.data.attributes.uri.url}` :
+            `${process.env.GIRCHI_DOMAIN}${userImgData.data.attributes.uri.url}` :
             `/assets/img/avatar.png`;
 
           const localStore = { token, userID, userImgPath, userFirstName, userLastName, userLoginName }
@@ -243,8 +252,14 @@ app.get("/constitution", (req, res) => {
 
 // Download PDFs Page
 app.get("/cards-download", (req, res) => {
-  let PDFDirectory = fs.readdirSync("generate/pdf");
-  res.render(__dirname + "/snippet/card-download", { PDFDirectory });
+  (async function generation () {
+
+    await generatepdf()
+
+    let PDFDirectory = fs.readdirSync("generate/pdf");
+    res.render(__dirname + "/snippet/card-download", { PDFDirectory });
+    
+    })()
 });
 
 
@@ -256,7 +271,9 @@ function freeCardNum() {
   .map(userJSON => JSON.parse(fs.readFileSync(`./database/${userJSON}`, 'utf8')))
   .sort((a, b) => b.card_number - a.card_number)
 
-  const newCardNum = usersList[0].card_number + 1;
-
-  return newCardNum
+  if(usersList[0] !== undefined) {
+    return usersList[0].card_number + 1;
+  } else {
+    return 1001
+  }
 }
