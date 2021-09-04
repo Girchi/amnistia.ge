@@ -264,16 +264,26 @@ app.get("/cards-download", (req, res) => {
 
 
 // Defines free card number
-function freeCardNum() {
+function freeCardNum(reserved) {
   const usersJSONList = fs.readdirSync("./database")
 
   const usersList = usersJSONList
   .map(userJSON => JSON.parse(fs.readFileSync(`./database/${userJSON}`, 'utf8')))
   .sort((a, b) => b.card_number - a.card_number)
 
-  if(usersList[0] !== undefined) {
-    return usersList[0].card_number + 1;
+  const reservedUsers = usersList.filter(user => Number(user.card_number) <= 1000)
+  const otherUsers = usersList.filter(user => Number(user.card_number) > 1000)
+
+  if(reserved && reservedUsers[0] && Number(reservedUsers[0].card_number) < 1000) {
+    const newCardNum = JSON.stringify(Number(reservedUsers[0].card_number) + 1);
+    return newCardNum.padStart(4, '0');
+  } else if (reserved && reservedUsers[0] === undefined) {
+    return '0001'
+  } else if (otherUsers[0] !== undefined) {
+    const newCardNum = JSON.stringify(Number(otherUsers[0].card_number) + 1);
+    return newCardNum.padStart(4, '0');
   } else {
-    return 1001
+    return '1001'
   }
+
 }
