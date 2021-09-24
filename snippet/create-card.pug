@@ -1,0 +1,126 @@
+// ======= Head =======
+include parts/head.pug
+// End Head
+
+link(rel='stylesheet' href='https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css')
+
+// Template Main CSS File
+link(href='/assets/css/style.css' rel='stylesheet')
+link(href='/assets/css/user.css' rel='stylesheet')
+
+// ======= Header =======
+include parts/header.pug
+// End Header
+
+// ======= Main =======
+.container
+  form#cardForm.row(action='/create-card' method='POST' enctype="multipart/form-data")
+    
+    .mb-3.col-12.col-sm-6.col-lg-4(style="display:none")
+      label.form-label Token
+      input.form-control(type='text' id="hiddenToken" name="token" )
+    
+    .mb-3.col-12.col-sm-6.col-lg-4
+      label.form-label სახელი და გვარი
+      input.form-control(type='text' id="nameInput" name="name" required)
+    
+    .mb-3.col-12.col-sm-6.col-lg-4
+      label.form-label პირადი ნომერი
+      input.form-control(type='text' id="idNumInput" name="id_number" maxlength='11' required)
+    
+    .mb-3.col-12.col-sm-6.col-lg-4
+      label.form-label დაბადების თარიღი
+      input.form-control(type='date' id="dateInput" name="birth_date" maxlength='5' required)
+    
+    .mb-3.col-12.col-sm-6.col-lg-4
+      label.form-label სტატუსის არჩევა
+      select.form-select(name='status' id="statusInput" required)
+        option(value='პატიმარი') პატიმარი
+        option(value='ადვოკატი') ადვოკატი
+        option(value='ქომაგი') ქომაგი
+        option(value='დამფუძნებელი') დამფუძნებელი
+        option(value='ინვესტორი' disabled) ინვესტორი
+        option(value='ოქროს_ინვესტორი' disabled) ოქროს ინვესტორი
+    
+    .mb-3.col-12.col-sm-6.col-lg-4
+      label.form-label დამატებითი სტატუსების არჩევა
+      select.form-select(name='other_statuses' id="multipleStatusInput" multiple )
+        option(value='პატიმარი') პატიმარი
+        option(value='ადვოკატი') ადვოკატი
+        option(value='ქომაგი') ქომაგი
+        option(value='დამფუძნებელი') დამფუძნებელი
+        option(value='ინვესტორი' disabled) ინვესტორი
+        option(value='ოქროს_ინვესტორი' disabled) ოქროს ინვესტორი
+
+    .mb-3.col-12.col-sm-6.col-lg-4
+      label.form-label.w-100 ფოტოს ატვირთვა
+      input.form-control-file(type='file' for='image' id="imageInput" name="image" value='Choose Image' required)
+
+    button.btn.btn-success(type='submit') დამატება
+
+  //- Live cards customize view
+  .cards
+    .card-side
+      svg(xmlns='http://www.w3.org/2000/svg' width='145.519' height='200.274' viewbox='0 0 145.519 200.274')
+        path#Path_2(data-name='Path 2' d='M476.99,0c-1.171,0-64.788,37.464-7.415,93.134s21.856,107.139,21.856,107.139H356.781V0Z' transform='translate(-356.781)' fill='#fcdbdb')
+
+      header='ამნისტიის მხარდამჭერთა საზოგადოება'
+      main
+        .card-col
+          span სახელი გვარი
+          h4#userName სახელი გვარი
+          span დაბადების თარიღი
+          h4#userDate 1990-05-08
+        .card-col
+          span პირადი ნომერი
+          h4#userIdNum 01001000100
+          span ნომერი
+          h4#userCardNum= currentCardNum
+        .card-col
+          img#cardImg.card-img(src='/assets/img/girchi.png' alt='user')
+      footer
+        .card-status
+          img#userBadge(src=`/assets/img/card/prisoner.png` alt='badge')
+          div#userStatus პატიმარი
+        div
+          | რეგისტრირდა: 
+          span#cardRegister= currentDate
+
+    .card-side
+      svg(xmlns='http://www.w3.org/2000/svg' width='145.519' height='200.274' viewbox='0 0 145.519 200.274')
+        path#Path_2(data-name='Path 2' d='M476.99,0c-1.171,0-64.788,37.464-7.415,93.134s21.856,107.139,21.856,107.139H356.781V0Z' transform='translate(-356.781)' fill='#fcdbdb')
+
+      header AMNESTY SUPPORTERS SOCIETY
+      main
+        .card-col
+          span Name Surname
+          h4#userName Name Surname
+          span Birth Date
+          h4#userDate 1990-05-08
+        .card-col
+          span Personal Number
+          h4#userIdNum 01001000100
+          span Number
+          h4#userCardNum= currentCardNum
+        .card-col
+          img(src= 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0CAYAAABUmhYnAAAAAklEQVR4AewaftIAAARkSURBVO3BQaocOBTAQMn8+19Zs31k4WC6JwnGVQLxB1UyqDFUMqixUcmGGkMlgxoblWyoMVQyqPEHLZ6rLJ6rLJ6r/PCLSr5IjQNqDJVsqLFRyUYlG2oMlXygki9SY1g8V1k8V1k8V/nhN9Q4UMmBSgY1BjWGSjYq2VDjiyr5gBoHKtlYPFdZPFdZPFf54S9TY6hkQ42hkkGNjUoOqDGoMVTyD1k8V1k8V1k8V/nhH6fGF6kxVDKosVHJP2zxXGXxXGXxXOWH36jkL6pkUGNQY6OSQY1BjQNqDJV8oJIvWjxXWTxXWTxX+eEXavxD1BgqGdQYKhnUGCoZ1BgqGdQYKhnUGCrZUON/tHiusniusniuYsW/TI0PVDKoMVTyATWGSv6ixXOVxXOVxXOVHw6pMVSyocZQyf+okkGNDTU2KhnUGCo5oMaBSgY1NhbPVRbPVRbPVX7UOFDJhhpDJYMaG5UcqGRQY6hkQ40PqHGgkg9UMqgxLJ6rLJ6rLJ6rCMRQyQE1DlQyqHGgkkGNjUr+R2oMlQxqbFQyqHGgkmHxXGXxXGXxXEUgNioZ1BgqGdQYKtlQY6hkUGOjkg01hko21NioZEONA5VsqLFRybB4rrJ4rrJ4riIQByo5oMZQyYYaByrZUOMDlQxqbFQyqLFRyRctnqssnqssnqv8VLKhxoYaG5UMahyoZEONjUoGNYZKvkiNoZJBjQ01hkoOLJ6rLJ6rLJ6rCMRQyYYaX1TJhhpDJYMaQyWDGgcqOaDGgUo+oMbG4rnK4rnK4rmKQByo5IvU+EAlG2oMlQxqDJUMamxUckCNoZIPqDEsnqssnqssnqv88ItKNtQYKtlQY6OSA2r8QZUManygki+qZFg8V1k8V1k8V/mpZFBjqOSAGkMlX1TJhhpDJYMaB9TYUGOjkkGNoZJBjaGSQY2NxXOVxXOVxXMVgRgqGdQYKjmgxlDJATU2KtlQY6hkUGOoZFBjqGRDjaGSA2p8YPFcZfFcZfFcxYodNTYqOaDGgUoOqDFU8gE1hkq+SI2NSg4snqssnqssnqsIxFDJF6kxVDKocaCSDTU2KhnUGCoZ1BgqGdT4okoGNYZKBjWGxXOVxXOVxXMVK/4mNYZKBjUOVPI/UmOjkgNqDJUcUGNYPFdZPFdZPFcRiD+okg01NirZUGOo5ANqDJUMagyVDGoMlQxqfKCSYfFcZfFcZfFc5YdfVPJFahyo5AOVDGoMlQxqDJUMlXygkgOVDGoMlWwsnqssnqssnqv88BtqHKjki9QYKtlQY6hko5IvUuMDagyVHFg8V1k8V1k8V/nhL1PjiyoZ1BgqGdT4gyoZ1BgqOaDGsHiusniusniu8sNfVsmGGoMaByoZ1NioZEONjUo+oMZQyYHFc5XFc5XFc5UffqOSP0iNoZIDahyoZFBjqGSjkg01NioZ1NhQY6hkWDxXWTxXWTxX+eEXavzD1Bgq2VBjqOSAGkMlH6hkUOOLFs9VFs9VFs9V/gOIzb8DE5+IJAAAAABJRU5ErkJggg==')
+      footer
+        .card-status
+          img#userBadge.img-fluid(src=`/assets/img/card/prisoner.png` alt='badge')
+          div#userStatus Prisoner
+        div
+          | Registered: 
+          span#cardRegister= currentDate
+
+// ======= Footer =======
+include parts/footer.pug
+// End Footer
+
+// ======= Scripts =======
+include parts/scripts.pug
+// End Scripts
+
+script(src='https://code.jquery.com/jquery-3.6.0.min.js' integrity='sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=' crossorigin='anonymous')
+script(src='https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js')
+
+script(type="module" src='/assets/js/customizeCard.js')

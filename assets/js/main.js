@@ -1,5 +1,21 @@
+import convertLetters from "/assets/js/convertLetters.js";
+import statusChanger from "/assets/js/statusChanger.js";
+
 (function () {
   "use strict";
+
+  document.querySelectorAll('.cleanWords').forEach(word => {
+    word.textContent = statusChanger(word.textContent, 'clean')
+  })
+  document.querySelectorAll('.enStatuses').forEach(word => {
+    word.textContent = statusChanger(word.textContent, 'lang')
+  })
+  document.querySelectorAll('.toClasses').forEach(word => {
+    word.textContent = statusChanger(word.textContent, 'class')
+  })
+  document.querySelectorAll('.convertWords').forEach(word => {
+    word.textContent = convertLetters(word.textContent)
+  })
 
   /**
    * Easy selector helper function

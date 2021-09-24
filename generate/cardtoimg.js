@@ -1,4 +1,3 @@
-// import nodeHtmlToImage from 'node-html-to-image'
 import generateCardTemplateGe from "./cardtoimg-assets/generateFrontCardTemplate.js";
 import generateCardTemplateEn from "./cardtoimg-assets/generateBackCardTemplate.js";
 import nodeHtmlToImage from "node-html-to-image";
@@ -8,16 +7,15 @@ import convertLetters from "../assets/js/convertLetters.js";
 import generateQR from "../assets/js/generateQR.js";
 import statusChanger from "../assets/js/statusChanger.js";
 
-async function cardtoimg (body){
+const cardtoimg = async (body) => {
 
-  const cardNum = body.card_number;
-  const QRValue = await generateQR(`https://amnistia.ge/user/${body.user_id}`);
-  const profileImg = convertImage(body.img)
-  const badgeIcon = convertImage(`/assets/img/card/${statusChanger(body.status, 'class')}.png`)
-  const assetImg = convertImage('/assets/img/card/amnistia.png')
+  const QRValue = await generateQR(`https://amnistia.ge/user/${body.id_number}`);
+  const profileImg = imageEncoder(body.img)
+  const badgeIcon = imageEncoder(`/assets/img/card/${statusChanger(body.status, 'class')}.png`)
+  const assetImg = imageEncoder('/assets/img/card/amnistia.png')
 
   await nodeHtmlToImage({
-    output: `./generate/card-imgs/${cardNum}-front.jpg`,
+    output: `./generate/card-imgs/${body.card_number}-front.jpg`,
     html: generateCardTemplateGe(),
     content: {
       name: body.name,
@@ -31,10 +29,10 @@ async function cardtoimg (body){
       badgeIcon,
       assetImg
     },
-  }).then(() => console.log(`${cardNum} frontcard created successfully!'`));
-    
+  }).catch((err) => console.log(err));
+
   await nodeHtmlToImage({
-    output: `./generate/card-imgs/${cardNum}-back.jpg`,
+    output: `./generate/card-imgs/${body.card_number}-back.jpg`,
     html: generateCardTemplateEn(),
     content: {
       card_number: body.card_number,
@@ -48,17 +46,38 @@ async function cardtoimg (body){
       assetImg,
       QRValue,
     },
-  }).then(() => console.log(`${cardNum} backcard created successfully!'`));
-
-  console.log(`User Number ${cardNum} Done...`); 
+  }).catch((err) => console.log(err));
+  
+  console.log(`User Number ${body.card_number} Done...`); 
 };
 
-function convertImage(img) {
+const generateCards = async () => {
+
+  const userBodies = fs.readdirSync("./database")
+    .map(userJSON => JSON.parse(fs.readFileSync(`./database/${userJSON}`, 'utf8')))
+    .sort((a, b) => a.card_number - b.card_number)
+
+  for(let body of userBodies){
+    const frontPath = `./generate/card-imgs/${body.card_number}-front.jpg`;
+    const backPath = `./generate/card-imgs/${body.card_number}-back.jpg`;
+
+    if (!fs.existsSync(frontPath) || !fs.existsSync(backPath)) {
+      console.log(`Started Creating Card ${body.card_number}`)
+      await cardtoimg(body)
+    }
+
+  }
+
+}
+
+function imageEncoder(img) {
   const cleanUrl = img.replace('/', './')
-  const image = fs.readFileSync(cleanUrl);
+  let image = fs.readFileSync(cleanUrl);
   const base64Image = new Buffer.from(image).toString('base64');
   const dataURI = 'data:image/jpeg;base64,' + base64Image
   return dataURI
 }
 
-export default cardtoimg;
+generateCards();
+
+export default cardtoimg

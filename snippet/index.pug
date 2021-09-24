@@ -6,8 +6,7 @@ include parts/head.pug
 link(href='assets/css/style.css' rel='stylesheet')
 
 script.
-  let x = !{JSON.stringify(tokenExpired)}
-  if(x === 'expired'){
+  if(!{JSON.stringify(isTokenExpired)} === 'expired'){
     window.localStorage.clear()
     window.location = '/';
   }
@@ -59,6 +58,7 @@ section#hero.d-flex
             a.golden-investor(href='') ოქროს ინვესტორი
           p.description საზოგადოების წევრი, რომელმაც განახორციელა არანაკლებ ათი ათასი ლარის ინვესტიცია.
 // End Hero
+
 main#main
   // ======= About Section =======
   section#about.about
@@ -71,6 +71,7 @@ main#main
           |ამის და სხვა ბევრ მიზეზთა გამო, ქვეყანაში უამრავი პატიმარია, რომელიც დღეს  ციხეში არ უნდა იჯდეს ან ახალი ცხოვრებისთვის ერთ შანსს მაინც იმსახურებს.
         a.btn-learn-more(href='constitution') კონსტიტუცია
   // End About Section
+
   // ======= About Video Section =======
   section#about-video.about-video
     .container(data-aos='fade-up')
@@ -110,13 +111,13 @@ main#main
           each user in usersList
             .swiper-slide
               .testimonial-item
-                a(href=`user/${user.user_id}`)
+                a(href=`user/${user.id_number}`)
                   img.testimonial-img(src=`${user.img}` alt='user image')
                   h3= user.name
-                  h4= user.status
+                  h4.cleanWords= user.status
         a.users-btn(href='users') სრული სია
-
   // End Testimonials Section
+
   // ======= Services Section =======
   section#services.services.section-bg
     .container(data-aos='fade-up')
@@ -164,21 +165,17 @@ main#main
     .container(data-aos='fade-up')
       .section-title
         h2 გუნდი
-        p „დიდი ამნისტიის მხარდამჭერთა“ საზოგადოების გუნდი
+        p კანაფის მოყვარულთა საზოგადოების გუნდი
       .row.justify-content-center.align-items-stretch
         .col-lg-4.col-md-6.d-flex.justify-content-center.align-items-stretch(data-aos='fade-up' data-aos-delay='100')
           .member
             .member-img
               img.img-fluid(src='assets/img/team/xvichia_iago.webp' alt='')
               .social
-                a(href='')
-                  i.bi.bi-twitter
-                a(href='')
+                a(href='https://www.facebook.com/KhvichiaI/' target="_blank")
                   i.bi.bi-facebook
-                a(href='')
+                a(href='https://www.instagram.com/iagoterton/' target="_blank")
                   i.bi.bi-instagram
-                a(href='')
-                  i.bi.bi-linkedin
             .member-info
               h4 იაგო ხვიჩია
               span დამფუძნებელი
@@ -187,13 +184,9 @@ main#main
             .member-img
               img.img-fluid(src='assets/img/team/vakhtang-megrelishvili_57da63ee2b090-800x445-1.jpg' alt='')
               .social
-                a(href='')
-                  i.bi.bi-twitter
-                a(href='')
+                a(href='https://www.facebook.com/vakhomegrelishvili' target="_blank")
                   i.bi.bi-facebook
-                a(href='')
-                  i.bi.bi-instagram
-                a(href='')
+                a(href='https://ge.linkedin.com/in/vakhtang-megrelishvili-62287536' target="_blank")
                   i.bi.bi-linkedin
             .member-info
               h4 ვახო მეგრელიშვილი
@@ -203,13 +196,11 @@ main#main
             .member-img
               img.img-fluid(src='assets/img/team/raqviasvili.jpg' alt='')
               .social
-                a(href='')
-                  i.bi.bi-twitter
-                a(href='')
+                a(href='https://www.facebook.com/rakviashvili.sandro/' target="_blank")
                   i.bi.bi-facebook
-                a(href='')
+                a(href='https://www.instagram.com/alexander.rakviashvili/' target="_blank")
                   i.bi.bi-instagram
-                a(href='')
+                a(href='https://ge.linkedin.com/in/alexander-rakviashvili-645a359a' target="_blank")
                   i.bi.bi-linkedin
             .member-info
               h4 სანდრო რაქვიაშვილი
@@ -280,6 +271,3 @@ include parts/footer.pug
 // ======= Scripts =======
 include parts/scripts.pug
 // End Scripts
-
-// Template Main JS File
-script(src='assets/js/main.js')
