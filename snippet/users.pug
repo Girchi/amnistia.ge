@@ -17,7 +17,7 @@ include parts/header.pug
   ul#usersList
     each user in usersList
       li
-        a.list-user(href=`user/${user.user_id}`)
+        a.list-user(href=`user/${user.id_number}`)
           img.user-img(src= user.img)
           span.user-name= user.name
   br
