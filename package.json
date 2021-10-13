@@ -4,7 +4,7 @@
   "version": "2.1.0",
   "description": "amnesty supporters society",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "node app.js"
   },
   "author": "girchi",
   "license": "ISC",
