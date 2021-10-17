@@ -9,7 +9,7 @@ body {
   font-family: "BPG Arial", sans-serif;
   color: var(--pageMainColor);
   overflow-x: hidden;
-  padding-top: 3.8rem;
+  padding-top: 5.8rem;
 }
 
 @media(max-width: 992px) {
@@ -449,6 +449,8 @@ h1, h2, h3, h4, h5, h6 {
   background-size: cover;
   position: relative;
   padding-top: 0;
+  margin-top: -1.5rem;
+  padding-top: 2rem;
 }
 
 #hero:before {
