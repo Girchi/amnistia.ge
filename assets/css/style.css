@@ -9,7 +9,7 @@ body {
   font-family: "BPG Arial", sans-serif;
   color: var(--pageMainColor);
   overflow-x: hidden;
-  padding-top: 5.8rem;
+  padding-top: 3.8rem;
 }
 
 @media(max-width: 992px) {
@@ -88,6 +88,27 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 9999;
   overflow: hidden;
   background: #fff;
+}
+
+.loading {
+  position: relative;
+
+}
+
+.loading::before {
+  content: "";
+  position: absolute;
+  top: calc(50% - 15px);
+  left: calc(50% + 20px);
+
+  border: 6px solid var(--greenParts);
+  border-top-color: #fff;
+  border-bottom-color: #fff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  -webkit-animation: animate-preloader 1s linear infinite;
+  animation: animate-preloader 1s linear infinite;
 }
 
 #preloader:before {
@@ -197,7 +218,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .navbar a,
-.navbar button, .navbar button:focus {
+.navbar button {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -330,6 +351,14 @@ h1, h2, h3, h4, h5, h6 {
   }
   .navbar ul {
     display: none;
+  }
+  .navbar .getstarted {
+    width: calc(100% - 30px);
+    margin: 0 auto;
+  }
+  .loading::before {
+    top: 5px;
+    left: calc(50% - 15px);
   }
 }
 

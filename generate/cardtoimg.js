@@ -78,6 +78,6 @@ function imageEncoder(img) {
   return dataURI
 }
 
-generateCards();
+// generateCards();
 
 export default cardtoimg

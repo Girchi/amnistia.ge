@@ -68,20 +68,20 @@ include parts/header.pug
       main
         .card-col
           span სახელი გვარი
-          h4#userName სახელი გვარი
+          h4#cardFullName სახელი გვარი
           span დაბადების თარიღი
-          h4#userDate 1990-05-08
+          h4#cardDate 1990-05-08
         .card-col
           span პირადი ნომერი
-          h4#userIdNum 01001000100
+          h4#cardIdNum 01001000100
           span ნომერი
-          h4#userCardNum= currentCardNum
+          h4#cardNum= currentCardNum
         .card-col
           img#cardImg.card-img(src='/assets/img/girchi.png' alt='user')
       footer
         .card-status
-          img#userBadge(src=`/assets/img/card/prisoner.png` alt='badge')
-          div#userStatus პატიმარი
+          img#cardBadge(src=`/assets/img/card/prisoner.png` alt='badge')
+          div#cardStatus პატიმარი
         div
           | რეგისტრირდა: 
           span#cardRegister= currentDate
@@ -94,20 +94,20 @@ include parts/header.pug
       main
         .card-col
           span Name Surname
-          h4#userName Name Surname
+          h4#cardFullName Name Surname
           span Birth Date
-          h4#userDate 1990-05-08
+          h4#cardDate 1990-05-08
         .card-col
           span Personal Number
-          h4#userIdNum 01001000100
+          h4#cardIdNum 01001000100
           span Number
-          h4#userCardNum= currentCardNum
+          h4#cardNum= currentCardNum
         .card-col
           img(src= 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAB0CAYAAABUmhYnAAAAAklEQVR4AewaftIAAARkSURBVO3BQaocOBTAQMn8+19Zs31k4WC6JwnGVQLxB1UyqDFUMqixUcmGGkMlgxoblWyoMVQyqPEHLZ6rLJ6rLJ6r/PCLSr5IjQNqDJVsqLFRyUYlG2oMlXygki9SY1g8V1k8V1k8V/nhN9Q4UMmBSgY1BjWGSjYq2VDjiyr5gBoHKtlYPFdZPFdZPFf54S9TY6hkQ42hkkGNjUoOqDGoMVTyD1k8V1k8V1k8V/nhH6fGF6kxVDKosVHJP2zxXGXxXGXxXOWH36jkL6pkUGNQY6OSQY1BjQNqDJV8oJIvWjxXWTxXWTxX+eEXavxD1BgqGdQYKhnUGCoZ1BgqGdQYKhnUGCrZUON/tHiusniusniuYsW/TI0PVDKoMVTyATWGSv6ixXOVxXOVxXOVHw6pMVSyocZQyf+okkGNDTU2KhnUGCo5oMaBSgY1NhbPVRbPVRbPVX7UOFDJhhpDJYMaG5UcqGRQY6hkQ40PqHGgkg9UMqgxLJ6rLJ6rLJ6rCMRQyQE1DlQyqHGgkkGNjUr+R2oMlQxqbFQyqHGgkmHxXGXxXGXxXEUgNioZ1BgqGdQYKtlQY6hkUGOjkg01hko21NioZEONA5VsqLFRybB4rrJ4rrJ4riIQByo5oMZQyYYaByrZUOMDlQxqbFQyqLFRyRctnqssnqssnqv8VLKhxoYaG5UMahyoZEONjUoGNYZKvkiNoZJBjQ01hkoOLJ6rLJ6rLJ6rCMRQyYYaX1TJhhpDJYMaQyWDGgcqOaDGgUo+oMbG4rnK4rnK4rmKQByo5IvU+EAlG2oMlQxqDJUMamxUckCNoZIPqDEsnqssnqssnqv88ItKNtQYKtlQY6OSA2r8QZUManygki+qZFg8V1k8V1k8V/mpZFBjqOSAGkMlX1TJhhpDJYMaB9TYUGOjkkGNoZJBjaGSQY2NxXOVxXOVxXMVgRgqGdQYKjmgxlDJATU2KtlQY6hkUGOoZFBjqGRDjaGSA2p8YPFcZfFcZfFcxYodNTYqOaDGgUoOqDFU8gE1hkq+SI2NSg4snqssnqssnqsIxFDJF6kxVDKocaCSDTU2KhnUGCoZ1BgqGdT4okoGNYZKBjWGxXOVxXOVxXMVK/4mNYZKBjUOVPI/UmOjkgNqDJUcUGNYPFdZPFdZPFcRiD+okg01NirZUGOo5ANqDJUMagyVDGoMlQxqfKCSYfFcZfFcZfFc5YdfVPJFahyo5AOVDGoMlQxqDJUMlXygkgOVDGoMlWwsnqssnqssnqv88BtqHKjki9QYKtlQY6hko5IvUuMDagyVHFg8V1k8V1k8V/nhL1PjiyoZ1BgqGdT4gyoZ1BgqOaDGsHiusniusniu8sNfVsmGGoMaByoZ1NioZEONjUo+oMZQyYHFc5XFc5XFc5UffqOSP0iNoZIDahyoZFBjqGSjkg01NioZ1NhQY6hkWDxXWTxXWTxX+eEXavzD1Bgq2VBjqOSAGkMlH6hkUOOLFs9VFs9VFs9V/gOIzb8DE5+IJAAAAABJRU5ErkJggg==')
       footer
         .card-status
-          img#userBadge.img-fluid(src=`/assets/img/card/prisoner.png` alt='badge')
-          div#userStatus Prisoner
+          img#cardBadge.img-fluid(src=`/assets/img/card/prisoner.png` alt='badge')
+          div#cardStatus Prisoner
         div
           | Registered: 
           span#cardRegister= currentDate

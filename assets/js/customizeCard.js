@@ -11,11 +11,11 @@ $(document).ready(function(){
   });
 });
 
-const userName = document.querySelectorAll('#userName');
-const userIdNum = document.querySelectorAll('#userIdNum');
-const userDate = document.querySelectorAll('#userDate');
-const userStatus = document.querySelectorAll('#userStatus');
-const userBadge = document.querySelectorAll('#userBadge');
+const cardFullName = document.querySelectorAll('#cardFullName');
+const cardIdNum = document.querySelectorAll('#cardIdNum');
+const cardDate = document.querySelectorAll('#cardDate');
+const cardStatus = document.querySelectorAll('#cardStatus');
+const cardBadge = document.querySelectorAll('#cardBadge');
 
 // Data changes on type
 function changeInputData() {
@@ -23,12 +23,12 @@ function changeInputData() {
   const idNumValue = idNumInput.value;
 
   if (nameValue) {
-    userName[0].textContent = convertLetters(nameValue, 'geo');
-    userName[1].textContent = convertLetters(nameValue);
+    cardFullName[0].textContent = convertLetters(nameValue, 'geo');
+    cardFullName[1].textContent = convertLetters(nameValue);
   }
 
   if (idNumValue) {
-    userIdNum.forEach(IdNum => {  
+    cardIdNum.forEach(IdNum => {  
       IdNum.textContent = idNumValue;
     })
   }
@@ -44,17 +44,17 @@ function changeSelectData() {
   const statusLang = statusChanger(statusValue, 'lang');
 
   if (statusValue) { 
-    userStatus[0].textContent = status;
-    userStatus[1].textContent = statusLang;
+    cardStatus[0].textContent = status;
+    cardStatus[1].textContent = statusLang;
 
-    userBadge.forEach(badge => {  
+    cardBadge.forEach(badge => {  
       badge.src = `/assets/img/card/${statusClass}.png`;
     })
   }
   
   if (dateValue) {
-    userDate.forEach(userDate => {  
-      userDate.textContent = dateValue;
+    cardDate.forEach(date => {  
+      date.textContent = dateValue;
     })
   }
 }
@@ -66,3 +66,5 @@ cardForm.addEventListener("change", changeSelectData);
 imageInput.addEventListener("change", function () {
   cardImg.src = URL.createObjectURL(this.files[0]);
 })
+
+export { changeInputData, changeSelectData };
