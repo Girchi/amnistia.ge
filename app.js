@@ -14,6 +14,7 @@ import sharp from "sharp";
 import convertLetters from "./assets/js/convertLetters.js";
 import cardtoimg from "./generate/cardtoimg.js";
 import generatepdf from "./generate/generatepdf.js";
+import generateQR from './assets/js/generateQR.js'
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
@@ -67,9 +68,10 @@ app.get("/users", (req, res) => {
 
 
 // User Inner Page
-app.get("/user/:id", (req, res) => {
+app.get("/user/:id",async (req, res) => {
   try {
     const userData = JSON.parse(fs.readFileSync(`./database/${req.params.id}.json`, 'utf8'));
+    userData.generatedQR = await generateQR(`https://amnistia.ge/user/${userData.id_number}`);
     res.render(__dirname + "/snippet/profile", { ...userData });
   } catch (error) {
     res.redirect(`/create-card`);
@@ -267,17 +269,8 @@ app.get("/constitution", (req, res) => {
 
 // Download PDFs Page
 app.get("/cards-download", (req, res) => {
-
-  let important = [], staff = [], users = [];
-
-  fs.readdirSync("generate/pdf").forEach(PDF => {
-    const firstDocumentValue = parseInt(PDF.split('-')[0].replace('.pdf',''));
-    firstDocumentValue < 10 ? important.push(PDF) : 
-    firstDocumentValue < 1000 ? staff.push(PDF) : users.push(PDF);
-  })
-
-  res.render(__dirname + "/snippet/card-download", { important, staff, users });
-
+  let documentsDir = fs.readdirSync('generate/pdf');
+	res.render(__dirname + '/snippet/card-download', { documentsDir });
 });
 
 
