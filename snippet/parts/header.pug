@@ -16,11 +16,13 @@ header#header.fixed-top
         li
           a.nav-link.scrollto(href='/#team') გუნდი
         li
-          a.nav-link.scrollto(href='/#faq') წევრობა
+          a.nav-link.scrollto(href='/petition') პეტიცია
         li
-          button.getstarted.login-btn#loginBtn ავტორიზაცია
+          button.login-btn.mx-3#loginBtn
+            i.bx.bxl-facebook-square
+            span ავტორიზაცია 
           div#loader
-        li 
+        li.user-area
           a.login-info#loginInfo(href="/redirect")
         li
           button.logout-btn#logoutBtn გასვლა
