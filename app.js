@@ -285,7 +285,7 @@ app.post("/cards-download", (req, res) => {
 
 // Petition Page
 app.get("/petition", (req, res) => {
-  res.render(__dirname + "/snippet/petition", { responseStatus: null });
+  res.render(__dirname + "/snippet/petition");
 });
 
 
