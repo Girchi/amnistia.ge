@@ -30,6 +30,7 @@ async function getPetitions() {
    for (const submission of data) {
       const { data: { data } } = await axiosInstance.get(`/webform_rest/amnistia_ge_pettition_form/submission/${submission.id}`)
     
+      console.log(data);
       usedIdNumbers.push(data.personal_number);
       fetchedData += `<li>${data.name} ${data.surname}</li>`
    }

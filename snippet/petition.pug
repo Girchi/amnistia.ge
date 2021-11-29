@@ -45,10 +45,14 @@ include parts/header.pug
               input.form-control(type='text' placeholder='მიუთითეთ გვარი' id="surnameInput" required)
             .form-group.mb-3
               label.col-form-label პირადი ნომერი*
-              input.form-control(type='text' placeholder='მიუთითეთ პირადი ნომერი' id="personalNumInput" maxlength='11' required)
+              input.form-control(type='number' placeholder='მიუთითეთ პირადი ნომერი'
+                onInput="this.value = this.value.slice(0, 11)"
+                id="personalNumInput" required)
             .form-group.mb-3
               label.col-form-label ტელეფონის ნომერი*
-              input.form-control(type='tel' placeholder='მიუთითეთ ტელეფონის ნომერი' id="phoneNumInput" maxlength='9' required)
+              input.form-control(type='number' 
+                onInput="this.value = this.value.slice(0, 9)"
+                placeholder='მიუთითეთ ტელეფონის ნომერი' id="phoneNumInput" required)
             .form-group.mb-5
               label.col-form-label ელ.ფოსტა*
               input.form-control(type='email' placeholder='მიუთითეთ ელ. ფოსტა' id="emailInput" required)
