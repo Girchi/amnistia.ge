@@ -8,3 +8,4 @@ https-conf/
 *.html
 .env
 .vscode
+keys/
